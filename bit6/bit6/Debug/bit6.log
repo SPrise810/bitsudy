@@ -1,0 +1,4 @@
+﻿  bit6.c
+C:\Users\SP\source\repos\bit6\bit6\bit6.c(210,16): warning C4013: “rand”未定义；假设外部返回 int
+C:\Users\SP\source\repos\bit6\bit6\bit6.c(229,7): warning C4013: “srand”未定义；假设外部返回 int
+  bit6.vcxproj -> C:\Users\SP\source\repos\bit6\Debug\bit6.exe
