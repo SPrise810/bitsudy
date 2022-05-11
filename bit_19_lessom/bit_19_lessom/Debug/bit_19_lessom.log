@@ -1,0 +1,4 @@
+﻿  bit_19_lesson.c
+C:\Users\SP\source\repos\bit_19_lessom\bit_19_lessom\bit_19_lesson.c(90,6): warning C4013: “gets”未定义；假设外部返回 int
+C:\Users\SP\source\repos\bit_19_lessom\bit_19_lessom\bit_19_lesson.c(95,18): warning C4013: “strlen”未定义；假设外部返回 int
+  bit_19_lessom.vcxproj -> C:\Users\SP\source\repos\bit_19_lessom\Debug\bit_19_lessom.exe
