@@ -492,7 +492,6 @@ int checkData(int* p)
 //
 //
 #include <stdio.h>
-
 void swapArgs(int* a, int* b) //交换函数
 {
 	int tmp;
@@ -532,7 +531,7 @@ void diveRank(int* p, int n)
 }
 
 int main()
-{
+{ 
 	int p[5] = { 1, 2, 3, 4, 5 }; //当然由于是全排列，所以初值必须给好。
 
 	diveRank(p, 0);
