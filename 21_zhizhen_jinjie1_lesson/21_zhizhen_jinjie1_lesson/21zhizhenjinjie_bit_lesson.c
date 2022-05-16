@@ -302,38 +302,74 @@
 //	int(*p)[3][5] = &arr;
 //	return 0;
 //}
-void fun(char* p, int sz, int n)
+//void fun(char* p, int sz, int n)
+//{
+//	char tmp = 0;
+//	int i,j;
+//	i = 0;
+//	for (j = 0; j < n; j++)
+//	{
+//		tmp = *p;
+//		for (i = 1; i <sz; i++)
+//		{
+//			*(p +i-1) = *(p + i);
+//		}
+//		*(p + sz-1) = tmp;
+//	}
+//}
+//int main()
+//{
+//	int n;
+//	scanf("%d", &n);
+//	char arr[10] = { "ABCDEF" };//ACDEBF
+//	int sz = strlen(arr);
+//	fun(arr,sz,n);
+//	printf("%s", arr);
+//	return 0;
+//}
+// 
+// 
+// 
+// 
+int findnum(int a[][3], int x, int y, int f) //第一个参数的类型需要调整
 {
-	char tmp = 0;
-	int i,j;
-	i = 0;
-	for (j = 0; j < n; j++)
+	int i = 0, j = x - 1; //从右上角开始遍历
+
+	while (j >= 0 && i < y)
 	{
-		tmp = *p;
-		for (i = 1; i <sz; i++)
+		if (a[i][j] < f) //比我大就向下
 		{
-			*(p +i-1) = *(p + i);
+			i++;
 		}
-		*(p + sz-1) = tmp;
+		else if (a[i][j] > f) //比我小就向左
+		{
+			j--;
+		}
+		else
+		{
+			return 1;
+		}
 	}
-}
-int main()
-{
-	int n;
-	scanf("%d", &n);
-	char arr[10] = { "ABCDEF" };//ACDEBF
-	int sz = strlen(arr);
-	fun(arr,sz,n);
-	printf("%s", arr);
 	return 0;
 }
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+
+int main()
+{
+	int a[][3] = { {1, 3, 5},
+				  {3, 5, 7},
+				  {5, 7, 9} }; //一个示例
+
+	if (findnum(a, 3, 3, 2))
+	{
+		printf("It has been found!\n");
+	}
+	else
+	{
+		printf("It hasn't been found!\n");
+	}
+
+	return 0;
+}
 // 
 // 
 // 
