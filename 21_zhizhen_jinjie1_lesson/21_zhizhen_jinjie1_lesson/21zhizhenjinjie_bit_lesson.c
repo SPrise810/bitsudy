@@ -302,7 +302,31 @@
 //	int(*p)[3][5] = &arr;
 //	return 0;
 //}
-// 
+void fun(char* p, int sz, int n)
+{
+	char tmp = 0;
+	int i,j;
+	i = 0;
+	for (j = 0; j < n; j++)
+	{
+		tmp = *p;
+		for (i = 1; i <sz; i++)
+		{
+			*(p +i-1) = *(p + i);
+		}
+		*(p + sz-1) = tmp;
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	char arr[10] = { "ABCDEF" };//ACDEBF
+	int sz = strlen(arr);
+	fun(arr,sz,n);
+	printf("%s", arr);
+	return 0;
+}
 // 
 // 
 // 
