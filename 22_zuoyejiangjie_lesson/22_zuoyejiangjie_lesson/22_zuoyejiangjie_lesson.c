@@ -169,6 +169,109 @@
 // 
 // 
 // 
+//通过地址打印
+//void print(int* p,int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d  ", *(p + i));
+//	}
+//	printf("\n");
+//}
+//void print2(int* p,int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d  ", *p);
+//		p++;//但是缺点是改变p指向的元素位置
+//	}
+//}
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	print(arr, sz);
+//	print2(arr, sz);
+//	return 0;
+//}
+// 
+// 
+//逆置字符串的内容
+//int main()
+//{
+//	char arr[1000] = { 0 };
+//	//scanf("%s", arr);//空格是读不进来的
+//	gets(arr);
+//	int sz = strlen(arr);
+//	char* left = arr;
+//	char* right = arr + sz - 1;
+//	while (left < right)
+//	{
+//		char tmp = 0;
+//		tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//		left++;
+//		right--;
+//
+//	}
+//	printf("%s", arr);
+//	return 0;
+//}
+// 
+// 
+// 
+//int main()
+//{
+//	int a = 0;
+//	int n = 0;
+//	scanf("%d %d", &a, &n);
+//	int i = 0;
+//	int sum = 0;
+//	int k = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		k = k * 10 + a;
+//		sum += k;
+//	}
+//	printf("%d", sum);
+//	return 0;
+//}
+// 
+// 水仙花数
+// 
+#include<math.h>
+int main()
+{
+	//水仙花数实质上是一种自幂数
+	//自幂数老多了，可以百度了解一下嘿嘿
+	int i = 0;
+	for (i = 0; i <= 100000; i++)
+	{
+		int n = 1;
+		int tmp = i;
+		while (tmp /= 10)
+		{
+			n++;
+		}
+		tmp = i;
+		int sum;
+		while (tmp)//1234
+		{
+			sum+=(int)pow(tmp % 10, n);//计算每一位的n次方，需要引用math头文件
+			//pow返回double,我们进行强制类型转化
+			tmp /= 10;
+		}
+		//比较
+		if (sum == i)
+		{
+			printf("%d ", i);
+		}
+	}
+	return 0;
+}
 // 
 // 
 // 
@@ -197,19 +300,12 @@
 // 
 // 
 // 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+// 32443124
 // 
 //
 
+//
+//3124312
 
 
 
