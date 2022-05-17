@@ -242,46 +242,126 @@
 // 
 // 水仙花数
 // 
-#include<math.h>
-int main()
-{
-	//水仙花数实质上是一种自幂数
-	//自幂数老多了，可以百度了解一下嘿嘿
-	int i = 0;
-	for (i = 0; i <= 100000; i++)
-	{
-		int n = 1;
-		int tmp = i;
-		while (tmp /= 10)
-		{
-			n++;
-		}
-		tmp = i;
-		int sum;
-		while (tmp)//1234
-		{
-			sum+=(int)pow(tmp % 10, n);//计算每一位的n次方，需要引用math头文件
-			//pow返回double,我们进行强制类型转化
-			tmp /= 10;
-		}
-		//比较
-		if (sum == i)
-		{
-			printf("%d ", i);
-		}
-	}
-	return 0;
-}
+//#include<math.h>
+//int main()
+//{
+//	//水仙花数实质上是一种自幂数
+//	//自幂数老多了，可以百度了解一下嘿嘿
+//	int i = 0;
+//	for (i = 0; i <= 100000; i++)
+//	{
+//		int n = 1;
+//		int tmp = i;
+//		while (tmp /= 10)
+//		{
+//			n++;
+//		}
+//		tmp = i;
+//		int sum;
+//		while (tmp)//1234
+//		{
+//			sum+=(int)pow(tmp % 10, n);//计算每一位的n次方，需要引用math头文件
+//			//pow返回double,我们进行强制类型转化
+//			tmp /= 10;
+//		}
+//		//比较
+//		if (sum == i)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
 // 
 // 
 // 
+// 作业
+//#include<stdio.h>
+//int main()
+//{
+//    int n = 0;
+//    while (scanf("%d", &n) != EOF)
+//    {
+//        int i, j;
+//        int tmp2 = 0;
+//        for (i = 0; i < n; i++)
+//        {
+//            printf("*");
+//            for (j = 0; j < i; j++)
+//            {
+//                int tmp = j;
+//                if (j > 2)
+//                {
+//                    while (tmp - 2)
+//                    {
+//                        printf(" ");
+//                        tmp--;
+//                    }
+//                }
+//                printf("*");
+//            }
+//            tmp2 = n - 2;
+//            if (i == n - 1)
+//                while (tmp2)
+//                {
+//                    printf("*");
+//                    tmp2--;
+//                }
+//            printf("\n");
+//        }
+//    }
+//    return 0;
+//}
 // 
 // 
+// 链接参考答案
+//int main() {
+//    int row;
+//    while (~scanf("%d", &row)) 
+//    {
+//            for (int i = 0; i < row; i++) 
+//            {
+//                    for (int j = 0; j <= i; j++) 
+//                    {
+//                      if (i - 1 && i - j && j != 0 && i != row - 1)
+//                           printf("  ");
+//                      else
+//                           printf("* ");
+//                    }
+//                printf("\n"); 
+//            }
+//    }
+//
+//    return 0;
+//}
 // 
-// 
-// 
-// 
-// 
+// bit参考答案
+//#include <stdio.h>
+//int main()
+//{
+//    int n = 0;
+//    while (scanf("%d", &n) != EOF)
+//    {
+//        int i = 0;
+//        for (i = 1; i <= n; i++)
+//        {
+//            int j = 0;
+//            for (j = 1; j <= n; j++)
+//            {
+//                if ((i == j) || (j == 1) || (i == n))
+//                {
+//                    printf("* ");
+//                }
+//                else
+//                {
+//                    printf("  ");
+//                }
+//            }
+//            printf("\n");
+//        }
+//    }
+//    return 0;
+//}
 // 
 // 
 // 
