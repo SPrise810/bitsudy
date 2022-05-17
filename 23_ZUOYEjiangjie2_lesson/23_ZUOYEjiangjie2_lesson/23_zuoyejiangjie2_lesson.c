@@ -235,9 +235,61 @@
 //}
 //
 //
+//牛客“公务员面试”题目
+//
+//int main()
+//{
+//    int i = 0;
+//    int score = 0;
+//    int max = 0;
+//    int min = 100;
+//    int sum = 0;
+//    int n = 0;
+//    while (scanf("%d", &score) != EOF)
+//        //和while（1）里面再加上scanf("%d",&score);相同
+//    {
+//        n++;
+//        if (score > max)
+//            max = score;
+//        if (score < min)
+//            min = score;
+//        sum += score;
+//        if (n == 7)
+//        {
+//            printf("%.2f\n", (sum - max - min) / 5.0);
+//            n = 0;
+//            sum = 0;
+//            max = 0;
+//            min = 100;
+//        }
+//    }
+//    return 0;
+//}
 //
 //
-
+//获得月份天数
+//int main()
+//{
+//    int y = 0;
+//    int m = 0;
+//    int days[12] = { 31,28,31,30,31,30,31,31,30,31,39,31 };
+//    while (scanf("%d %d", &y, &m) == 2)//读到1个就返回1
+//    //while(~scanf("%d %d",&y,&m))//EOF返回是-1，补码为全1，按位取反~就全为0了
+//    {                    //或者写成！=EOF，正常就是返回2 
+//                        //啥也读不到就是就是返回EOF
+//        int day = days[m - 1];
+//        if (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0))
+//        {
+//            if (m == 2)
+//            {
+//                day += 1;
+//            }
+//        }
+//        printf("%d\n", day);
+//    }
+//    return 0;
+//}
+//用case语句就是麻烦点。因为要写很多个case月份对应的天数
 
 
 
