@@ -290,7 +290,68 @@
 //    return 0;
 //}
 //用case语句就是麻烦点。因为要写很多个case月份对应的天数
-
+//
+//#include<stdio.h>
+//int main()
+//{
+//    int n = 0;
+//    int arr[100] = { 0 };
+//    int arr2[100] = { 0 };
+//    scanf("%d", &n);
+//    int i = 0;
+//    for (i = 0; i < n; i++)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int m = 0;
+//    scanf("%d", &m);
+//    int j = 0;
+//    for (i = 0; i < n; i++)
+//    {
+//        if (arr[i] != m)
+//        {
+//            arr2[j] = arr[i];
+//            if (j != n - 1)
+//            {
+//                j++;
+//            }
+//        }
+//    }
+//    for (i = 0; i < j; i++)
+//        printf("%d ", arr2[i]);
+//    return 0;
+//}
+//
+//
+//
+//#include <stdio.h>
+//int main()
+//{
+//    int n = 0;
+//    int arr[50] = { 0 };
+//    int del = 0;
+//    scanf("%d", &n);
+//    int i = 0;
+//    for (i = 0; i < n; i++)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    scanf("%d", &del);//要删除的元素
+//    int j = 0;
+//    for (i = 0; i < n; i++)
+//    {
+//        if (arr[i] != del)
+//        {
+//            arr[j++] = arr[i];
+//        }
+//    }
+//
+//    for (i = 0; i < j; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
 
 
 
