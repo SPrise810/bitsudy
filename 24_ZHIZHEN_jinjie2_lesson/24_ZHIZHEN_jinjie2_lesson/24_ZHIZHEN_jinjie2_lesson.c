@@ -80,17 +80,82 @@
 // 二级指针是用来存放一级指针的地址的
 // 数组指针是用来存放数组的地址的
 // 
+// 其实我们在形参里面疯狂的写数组，但是本质上还是指针，编译器会进行转换
+//4.3  一级指针传参
+//void test(int* p, int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", *p);
+//		p++;
+//	}
+//
+//}
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int* p = arr;
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	test(p,sz);//p是一级指针 
+//	return 0;
+//}
+// 
+//我们通过函数反过来看main函数里面传递什么我们也要能够得到其结果
 // 
 // 
+// 二级指针：
+//void test(char** p)
+//{
+//	printf("%c", **p);
+//}
+//int main()
+//{
+//	char a = 'w';
+//	char* p = &a;
+//	char** pa = &p;
+//	test(pa);
+//	return 0;
+//}
+// 
+//void test(char** p)//二级指针 
+//{
+//
+//}
+//int main()
+//{
+//	char ch = 'a';
+//	char* pc = &ch;
+//	char** ppc = &pc;
+//	test(&pc);
+//	test(ppc);
+//	char* arr[6];
+//	test(arr);
+//	return 0;
+//}
 // 
 // 
+//二维数组
+//void test(char(*p)[6])//这是    行地址
+//{
+//
+//}
+//void test(char(*P)[3][5])//这是 整个二维数组的地址
+//{
+//	*p;//这里面是整个二维数组的数组名，又是首元素的地址，又是二维数组第一行的地址
+//}
+//int main()
+//{
+//	char arr[3][6];
+//	test(arr);
+//	test(&arr);
+//	return 0;
+//}
 // 
 // 
+//
 // 
-// 
-// 
-// 
-// 
+//一级指针和二级指针就是这样滴 
 // 
 // 
 // 
