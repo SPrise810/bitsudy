@@ -352,7 +352,58 @@
 //    }
 //    return 0;
 //}
-
+//int main()
+//{
+//    int n = 0;
+//    while (~scanf("%d", &n))
+//    {
+//        int i = 0;
+//        int right = n - 1;
+//        int left = 0;
+//        for (i = 0; i < n; i++)
+//        {
+//            int j = 0;
+//            for (j = 0; j < n; j++)
+//            {
+//                if (j == left || j == right)
+//                {
+//                    printf("*");
+//                }
+//                else
+//                    printf(" ");
+//            }
+//            printf("\n");
+//            left++;
+//            right--;
+//        }
+//
+//
+//    }
+//    return 0;
+//}
+int main()
+{
+    int n = 0;
+    while (scanf("%d", &n) != EOF)
+    {
+        int i = 0;
+        int j = 0;
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < n; j++)
+            {
+                if (i == j)
+                    printf("*");
+                else if (i + j == n - 1)//因为行和列是从0开始的
+                    printf("*");
+                else
+                    printf(" ");
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
 
 
 
