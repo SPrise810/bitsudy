@@ -324,9 +324,13 @@
 //int cmp_stu_by_name(const void* e1, const void* e2)
 //{
 //	//return strcmp(((struct stu*)e1)->name, ((struct stu*)e2)->name);//升序
-//	return strcmp(((struct stu*)e2)->name, ((struct stu*)e1)->name);//降序
+//	return strcmp(((struct stu*)e2)->name, ((struct stu*)e1)->name);//降序（就是添加一个负号）
 //
 //}
+// 
+// 
+// 
+// 
 ////strcmp是字符串比较，按照字典顺序进行比较，从头开始进行每一位字母的比较，相同就跳到下一个
 //void test3()
 //{
@@ -358,10 +362,115 @@
 // 我们这里主要还是讲的qsort函数的使用方法
 // 
 // 
+//void qsort(void* base,//待排序数据的其实位置
+//	size_t num,//数组元素个数
+//	size_t size,//一个元素的字节大小
+//	int (*compar)(const void*e1, const void*e2)//函数指针 
+//// cmp是一个比较函数，      待比较的两个元素的地址
+////返回类型是Int,   有三种值  大于0的数  0   小于0的数
+//);
+//
+//
+	//我们想实现一下万能冒泡排序
+//
+// qsort函数的作者能不能想到今天我们使用qsort排序什么具体类型的数据呢？
+// 不会
+// 所以才使用 void* 指针
+// 我们使用base ， 以及 元素个数  以及宽度 （元素的字节大小）
+// 函数指针
+// 数据类型不同，比较方法不同
+// 我们应该对此 针对冒泡排序重新设计
+//int cmp_int(const void* e1, const void* e2)
+//{
+//	return (*(int*)e1 - *(int*)e2);
+//}
+//void print_arr(int arr[], int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++) 
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//void swap(char* p1, char* p2, int width)
+//{
+//	//08 00 00 00  /  07 00 00 00
+//	int i = 0;
+//	for (i = 0; i < width; i++)
+//	{
+//		char tmp = *p1;
+//		*p1 = *p2;
+//		*p2 = tmp;
+//		*p1++;
+//		*p2++;
+//	}
+//
+//}
+//void  bubble_sort(void* base, int num, int width, int(*cmp)(const void* e1, const void* e2))
+//{
+//	//void* base 表示我也不知道地址类型是什么，然后传入的e1 e2我们也同样保留余地
+//	int i = 0;
+//	for (i = 0; i < num-1; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < num - 1; j++)
+//		{
+//			//我们暂时不知道该如何比较两个元素的大小，所以先分析一下
+//			//默认升序的话， cmp函数>0 ,我们要交换
+//			//假设以int为例子{9，8，7，6，5，4，3，2，1}
+//			//我们要在cmp函数中传入要比较的两个元素的地址
+//			//9是base,首元素
+//			//我们强制类型转换成(char*)base+width 这样就找到了我们下一个元素8
+//			//7的地址就是（char*)base+(j+1)*width
+//			//if (cmp(, ) > 0)
+//			if(cmp((char*)base+width*j,(char*)base+width*(j+1)) > 0)
+//			{
+//				//交换
+//				swap((char*)base + width * j, (char*)base + width * (j + 1), width);
+//			}
+//		}
+//	}
+//}
+//void test4()
+//{
+//	int arr[] = { 2,5,4,3,1,6,7,9,8,10 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	bubble_sort(arr, sz, sizeof(arr[0]), cmp_int);
+//	print_arr(arr, sz);
+//}
+////
+//// 
+////
+//struct stu
+//{
+//	char name[20];
+//	int age;
+//	double score;
+//};
+//int cmp_stu_by_name(const void* e1, const void* e2)
+//{
+//	//return strcmp(((struct stu*)e1)->name, ((struct stu*)e2)->name);//升序
+//	return strcmp(((struct stu*)e1)->name, ((struct stu*)e2)->name);//降序
+//
+//}
+//void test5()
+//{
+//	struct stu arr[3] = { { "zhangsan",20,55.5},{"llisi",50,88.0},{"wangwu",30,90.0} };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	//qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_age);
+//	bubble_sort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);
+//
+//}
+//int main()
+//{
+//	test5();
+//	return 0;
+//}
 // 
-// 
-// 
-// 
+// 其实我们通过冒泡排序模拟实现这个qsort函数还是有差异的，我们需要
+// 自己提供 不同数据类型 的比较函数放入程序中
+// 这样才能使我们的比较能够正常进行
+// 今天的课就这么结束了嘿嘿
 // 
 // 
 // 
