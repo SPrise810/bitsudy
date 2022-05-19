@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
+#include<stdlib.h>
 //
 //首先： 回忆知识点
 //我们学习了一个函数指针
@@ -127,105 +128,234 @@
 // 我们通过回调函数继续优化
 // 冗余在每一个case语句都是重复的操作
 // 
-void menu()
-{
-	printf("********************\n");
-	printf("****1add2sub********\n");
-	printf("****3mul4div********\n");
-	printf("******0rexit********\n");
-}
-int add(int x, int y)
-{
-	return x + y;
-}
-int sub(int x, int y)
-{
-	return x - y;
-}
-int mul(int x, int y) 
-{
-	return x * y;
-}
-int div(int x, int y)
-{
-	return x / y;
-}
-clc(int (*pf)(int, int))
-{
-	int x;
-	int y;
-	printf("请输入两个操作数字：");
-		scanf("%d %d", &x, &y); 
-		int ret = pf(x, y);
-		printf("%d\n", ret);
-}
-int main()
-{
-	int n = 0;
-	int x = 0;
-	int y = 0;
-	int ret = 0;
-	do 
-	{
-		menu();
-		printf("请选择：");
-			scanf("%d", &n);
-
-			switch (n)
-			{
-				//我们初步的想法是将每一个case语句里的代码进行封装
-				//成为一个函数，但是我们在每个case里面实现的又是不同的算数 函数+-*\
-				//那么我们就
-			case 1:
-				//printf("请输入两个操作数字：");
-				//scanf("%d %d", &x, &y); 
-				//ret=add(x, y);
-				//printf("结果= %d\n", ret);
-				clc(add);
-				break;
-			case 2:
-				/*printf("请输入两个操作数字：");
-				scanf("%d %d", &x, &y); 
-				ret=sub(x, y);
-				printf("结果= %d\n", ret);*/
-				clc(sub);
-					break;
-			case 3:
-				/*printf("请输入两个操作数字：");
-				scanf("%d %d", &x, &y); 
-				ret=mul(x, y);
-				printf("结果= %d\n", ret);*/
-				clc(mul);
-					break;
-			case 4:
-			/*	printf("请输入两个操作数字：");
-				scanf("%d %d", &x, &y); 
-				ret=div(x, y);
-				printf("结果= %d\n", ret);*/
-				clc(div);
-					break;
-				case 0:
-					printf("退出\n");
-					break;
-				default:
-				{
-					printf("请重新输入：\n");
-				}
-			}
-	} while (n);
-	return 0;
-}
-// 缺点： 冗余
+//void menu()
+//{
+//	printf("********************\n");
+//	printf("****1add2sub********\n");
+//	printf("****3mul4div********\n");
+//	printf("******0rexit********\n");
+//}
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int mul(int x, int y) 
+//{
+//	return x * y;
+//}
+//int div(int x, int y)
+//{
+//	return x / y;
+//}
+//clc(int (*pf)(int, int))
+//{
+//	int x;
+//	int y;
+//	printf("请输入两个操作数字：");
+//		scanf("%d %d", &x, &y); 
+//		int ret = pf(x, y);
+//		printf("%d\n", ret);
+//}
+//int main()
+//{
+//	int n = 0;
+//	int x = 0;
+//	int y = 0;
+//	int ret = 0;
+//	do 
+//	{
+//		menu();
+//		printf("请选择：");
+//			scanf("%d", &n);
+//
+//			switch (n)
+//			{
+//				//我们初步的想法是将每一个case语句里的代码进行封装
+//				//成为一个函数，但是我们在每个case里面实现的又是不同的算数 函数+-*\
+//				//那么我们就
+//			case 1:
+//				//printf("请输入两个操作数字：");
+//				//scanf("%d %d", &x, &y); 
+//				//ret=add(x, y);
+//				//printf("结果= %d\n", ret);
+//				clc(add);
+//				break;
+//			case 2:
+//				/*printf("请输入两个操作数字：");
+//				scanf("%d %d", &x, &y); 
+//				ret=sub(x, y);
+//				printf("结果= %d\n", ret);*/
+//				clc(sub);
+//					break;
+//			case 3:
+//				/*printf("请输入两个操作数字：");
+//				scanf("%d %d", &x, &y); 
+//				ret=mul(x, y);
+//				printf("结果= %d\n", ret);*/
+//				clc(mul);
+//					break;
+//			case 4:
+//			/*	printf("请输入两个操作数字：");
+//				scanf("%d %d", &x, &y); 
+//				ret=div(x, y);
+//				printf("结果= %d\n", ret);*/
+//				clc(div);
+//					break;
+//				case 0:
+//					printf("退出\n");
+//					break;
+//				default:
+//				{
+//					printf("请重新输入：\n");
+//				}
+//			}
+//	} while (n);
+//	return 0;
+//}
 // 
 // 
 // 
 // 
 // 
+///////真滴Cxdm
+// 我们继续讲啦
+// 我们刚刚讲了回调函数的例子：
+// 再来一个
 // 
 // 
+// qsort是一个库函数
+// 基于快速排序算法实现的一个排序的函数
+// 有什么牛逼的呢？
+// 它能排任意类型的数据
+// 我们写的排序不一定能 例如test1（）
+// 我们探究一下它的使用
 // 
+//void buddle_sort(int arr[], int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz - 1; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < sz-1-i; j++) 
+//		{
+//			if (arr[j] > arr[j + 1])
+//			{
+//				int tmp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = tmp;
+//			}
+//		}
+//	}
+//
+//}
+//void print_arr(int arr[], int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++) 
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//void test1()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	//排序为升序
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	buddle_sort(arr, sz);
+//	print_arr(arr, sz);
+//	//这样我们的函数就被固定住了，我们只能对int 类型的数据进行排序
+//	return 0;
+//}
+//int cmp_int(const void*e1,const void*e2)
+//{
+//	//if(*e1> *e2)   //err
+//	//e1 e2 是不确切类型的指针，不能直接解引用
+//	//我们要明确它的指针类型
+//	//它怎么想呢？ 
+//	//它是个垃圾桶
+//	//int a = 10;
+//	//float* pf = &a;//err 
+//	//void* pf = &a;//不报错
+//	//pf+1；//err不知道加多少字节
+//	//*pf  //err 寄
+//	//那么到底该怎么做呢？
+//	//如下
+//	//if (*(int*)e1 > *(int*)e2)
+//	//{
+//	//	return 1;
+//	//}
+//	//else if ((*(int*)e1 == *(int*)e2))
+//	//	return 0;
+//	//else
+//	//	return -1;
+//	//简化后：
+//	return (*(int*)e1 - *(int*)e2);
+//}
+//void test2()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	//假设排序的是整型数据： 用>  <
+//	//但如果是结构体数据进行比较，那么拿啥来比较？
+//	//我们可能不方便直接用大于小于号来比较
+//	//使用者根据实际情况，提供一个函数，来实现2个数据的比较~
+//	//函数的
+//	qsort(arr, sz, sizeof(arr[0]), cmp_int);
+//	print_arr(arr, sz);
+//
+//}
+////
+////使用qsort 排序结构体
+//struct stu
+//{
+//	char name[20];
+//	int age;
+//	double score;
+//};
+//int cmp_stu_by_age(const void* e1,const void* e2)//按照年龄排序
+//{
+//	return ((struct stu*)e1)->age - ((struct stu*)e2)->age;
+//} 
+//int cmp_stu_by_name(const void* e1, const void* e2)
+//{
+//	//return strcmp(((struct stu*)e1)->name, ((struct stu*)e2)->name);//升序
+//	return strcmp(((struct stu*)e2)->name, ((struct stu*)e1)->name);//降序
+//
+//}
+////strcmp是字符串比较，按照字典顺序进行比较，从头开始进行每一位字母的比较，相同就跳到下一个
+//void test3()
+//{
+//	struct stu arr[3] = { { "zhangsan",20,55.5},{"llisi",50,88.0},{"wangwu",30,90.0} };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	//qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_age);
+//	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);
+// //最后这个函数是 排序方法函数，肯定会在qsort内部被调用很多次的
+//
+//}
+////
+//int main()
+//{
+//	//test2();//可以运行
+//	test3();//调试来看效果F10 
+//	return 0;
+//}
+//我们通过cplusplus 看看qsort函数的定义嘿嘿
+//
+//void qsort(void* base,//待排序数据的其实位置
+//	size_t num,//数组元素个数
+//	size_t size,//一个元素的字节大小
+//	int (*compar)(const void*e1, const void*e2)//函数指针 
+//// cmp是一个比较函数，      待比较的两个元素的地址
+////返回类型是Int,   有三种值  大于0的数  0   小于0的数
+//);
 // 
-// 
+// strcmp 这个函数也是非常的厉害，它比较的是字母的ASCII码值
+// 我们这里主要还是讲的qsort函数的使用方法
 // 
 // 
 // 
