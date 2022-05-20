@@ -43,28 +43,51 @@
 // 
 //第三题
 //
+//int main()
+//{
+//	char arr[] = { 'a','b','c','d','e','f' };
+//	printf("%d\n", strlen(arr));//     arr无\0会在数组后面继续数，直到发现\0  随机值
+//	printf("%d\n", strlen(arr+0));//   首元素的地址  随机值
+//	//printf("%d\n", strlen(*arr));//不报错，但是有问题 且编译器发现不了    数组首元素  char 'a'=97，锤子看什么都是钉子，看见就要敲一敲 在指针的眼里什么都是地址，97不能是地址，会访问出错err   
+//	//printf("%d\n", strlen(arr[1]));//不报错，但是有问题 且编译器发现不了  我们把98传给指针，也是错误的err
+//	printf("%d\n", strlen(&arr));//    取出的是整个数组的地址，还是随机值
+//	printf("%d\n", strlen(&arr+1));//  数组后面的的地址  随机值
+//	printf("%d\n", strlen(&arr[0]+1));//  第二个元素的地址 随机值
+//	return 0;
+//	//我们向内存申请空间  是   创建变量
+//	//sizeof是操作符
+//}
+// 
+// 
+//第四题 
+// 
 int main()
 {
-	char arr[] = { 'a','b','c','d','e','f' };
-	printf("%d\n", strlen(arr));//     arr无\0会在数组后面继续数，直到发现\0  随机值
-	printf("%d\n", strlen(arr+0));//   首元素的地址  随机值
-	//printf("%d\n", strlen(*arr));//不报错，但是有问题 且编译器发现不了    数组首元素  char 'a'=97，锤子看什么都是钉子，看见就要敲一敲 在指针的眼里什么都是地址，97不能是地址，会访问出错err   
-	//printf("%d\n", strlen(arr[1]));//不报错，但是有问题 且编译器发现不了  我们把98传给指针，也是错误的err
-	printf("%d\n", strlen(&arr));//    取出的是整个数组的地址，还是随机值
-	printf("%d\n", strlen(&arr+1));//  数组后面的的地址  随机值
-	printf("%d\n", strlen(&arr[0]+1));//  第二个元素的地址 随机值
+	char arr[] = "abcdef";// abcdef\0
+	printf("%d\n", sizeof(arr));// 数组总大小 7 
+	printf("%d\n", sizeof(arr+0));//    数组首元素地址 4/8个字节
+ 	printf("%d\n", sizeof(*arr));//   数组首元素地址解引用  'a'=1字节
+	printf("%d\n", sizeof(arr[1]));// 下标位1 的元素  数组的第二个元素 1字节
+	printf("%d\n", sizeof(&arr));//   数组的地址   4/8字节
+	printf("%d\n", sizeof(&arr+1));//  数组\0后面的地址  4/8字节
+	printf("%d\n", sizeof(&arr[0]+1));//  数组第二个元素的地址  4/8字节
 	return 0;
-	//我们向内存申请空间  是   创建变量
-	//sizeof是操作符
 }
 // 
 // 
-// 
-// 
-// 
-// 
-// 
-// 
+// 第五题
+int main()
+{
+	char arr[] = "abcdef";// abcdef\0
+	printf("%d\n", strlen(arr));//     
+	printf("%d\n", strlen(arr+0));//   
+	printf("%d\n", strlen(*arr));//
+	printf("%d\n", strlen(arr[1]));//
+	printf("%d\n", strlen(&arr));//   
+	printf("%d\n", strlen(&arr+1));//  
+	printf("%d\n", strlen(&arr[0]+1));// 
+	return 0;
+}
 // 
 // 
 // 
