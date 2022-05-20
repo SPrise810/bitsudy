@@ -364,59 +364,59 @@
 //}
 // 缺点： 冗余
 // 我们进行优化
-void menu()
-{
-	printf("********************\n");
-	printf("****1add2sub********\n");
-	printf("****3mul4div********\n");
-	printf("******0rexit********\n");
-}
-int add(int x, int y)
-{
-	return x + y;
-}
-int sub(int x, int y)
-{
-	return x - y;
-}
-int mul(int x, int y)
-{
-	return x * y;
-}
-int div(int x, int y)
-{
-	return x / y;
-}
-int main()
-{
-	int n = 0;
-	int x = 0;
-	int y = 0;
-	int ret = 0;
-	//int (*pfarr[5])(int, int) = { 0,add,sub,mul,div };
-	//修改
-	int (*pfarr[])(int, int) = { 0,add,sub,mul,div };//不写元素个数然后添加函数
-	//美滋滋
-
-	do
-	{
-		menu();
-		printf("请选择：");
-		scanf("%d", &n);
-		if (n == 0)
-			printf("退出计算器\n");
-		else if (n >= 1 && n <= 4)
-		{
-			printf("请输入两个操作数\n");
-			scanf("%d %d", &x, &y);
-			int ret = pfarr[n](x, y);
-			printf("%d\n", ret);
-		}
-		else
-			printf("选择错误\n");
-	} while (n);
-	return 0;
-}
+//void menu()
+//{
+//	printf("********************\n");
+//	printf("****1add2sub********\n");
+//	printf("****3mul4div********\n");
+//	printf("******0rexit********\n");
+//}
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int div(int x, int y)
+//{
+//	return x / y;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int x = 0;
+//	int y = 0;
+//	int ret = 0;
+//	//int (*pfarr[5])(int, int) = { 0,add,sub,mul,div };
+//	//修改
+//	int (*pfarr[])(int, int) = { 0,add,sub,mul,div };//不写元素个数然后添加函数
+//	//美滋滋
+//
+//	do
+//	{
+//		menu();
+//		printf("请选择：");
+//		scanf("%d", &n);
+//		if (n == 0)
+//			printf("退出计算器\n");
+//		else if (n >= 1 && n <= 4)
+//		{
+//			printf("请输入两个操作数\n");
+//			scanf("%d %d", &x, &y);
+//			int ret = pfarr[n](x, y);
+//			printf("%d\n", ret);
+//		}
+//		else
+//			printf("选择错误\n");
+//	} while (n);
+//	return 0;
+//}
 // 这才是真正的函数指针的用途
 // 相当于一块跳板，这个东西我们叫做转移表
 // 有跳转的效果
@@ -433,8 +433,27 @@ int main()
 // 
 // 
 // 
-// 
-// 
+void fun(char* arr, int sz,int n))
+{
+	int i = 0;
+	for (i = 0; i < n; i++)
+	{
+		int j = 0;
+		for (j = 0; j < sz; j++)
+		{
+			*(arr + ((j + 1) % sz)) = *(arr + (j % sz));
+		}
+	}
+}
+int main()
+{
+	char arr[100] = {"ABCDEFG"};
+	int sz = strlen(sz);
+	int n = 0;
+	scanf("%d", &n);
+	fun(arr, sz,n);
+	return 0;
+}
 // 
 // 
 // 
