@@ -433,25 +433,33 @@
 // 
 // 
 // 
-void fun(char* arr, int sz,int n))
+void fun(char* arr, int sz,int n)
 {
 	int i = 0;
 	for (i = 0; i < n; i++)
 	{
 		int j = 0;
-		for (j = 0; j < sz; j++)
+		char tmp = *arr;
+		for (j = 0; j < sz-1; j++)
 		{
-			*(arr + ((j + 1) % sz)) = *(arr + (j % sz));
+			*(arr + ((j) % sz)) = *(arr + (j+1 % sz));
 		}
+		*(arr + sz - 1) = tmp;
 	}
 }
+#include<stdlib.h>
 int main()
-{
+	{
 	char arr[100] = {"ABCDEFG"};
-	int sz = strlen(sz);
+	int sz = strlen(arr);
 	int n = 0;
 	scanf("%d", &n);
 	fun(arr, sz,n);
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		printf("%c ", arr[i]);
+	}
 	return 0;
 }
 // 
