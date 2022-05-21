@@ -76,34 +76,87 @@ int main()
 // 
 // 
 // 第五题
+//int main()
+//{
+//	char arr[] = "abcdef";// abcdef\0
+//	//strlen统计\0之前的数据个数
+//	printf("%d\n", strlen(arr));//   6     
+//	printf("%d\n", strlen(arr+0));//    首元素的地址  6 
+//	printf("%d\n", strlen(*arr));//    err  97非法访问内存，出错（编译器检查不出）
+//	printf("%d\n", strlen(arr[1]));// err   98非法访问内存， 出错（编译器检查不出）
+//	printf("%d\n", strlen(&arr));//   6
+//	printf("%d\n", strlen(&arr+1));//   随机值
+//	printf("%d\n", strlen(&arr[0]+1));// 第二个元素的地址 5
+//	return 0;
+//}
+// 
+// 
+//sizeof 是一个操作符  计算的是对象所占内存的大小-单位是字节 size_t
+// 不在乎内存中存放的是什么，只在乎内存大小
+// 
+// strlen 库函数
+// 只能求字符串长度
+// 从给定的地址访问字符，统计\0之前出现的字符个数
+// 只能求字符串，小心非法访问
+// 
+// 
+// 第六题
+// 
+//int main()
+//{
+//	char* p = "abcdef";// 在内存中 存放着一个常量字符串abcdef
+////指针p，p是指针变量  指向了 字符串“abcdef”
+//	printf("%d\n", sizeof(p));//       是地址   
+//	printf("%d\n", sizeof(p+1));//     是地址   字符b的地址
+//	printf("%d\n", sizeof(*p));//      是  a  ，char 一个字节
+//	printf("%d\n", sizeof(p[0]));//    a   一个字节  
+//	printf("%d\n", sizeof(&p));//      指针变量在内存中的地址，二级地址
+//	printf("%d\n", sizeof(&p + 1));//  &p+1，  p 为 char* ,char* *q=&p;跳过p这个地址，后面的地址，4/8个字节
+//	printf("%d\n", sizeof(&p[0] + 1));// 第一个元素的地址+1 -->b的地址   4/8字节
+//	return 0;
+//}
+// 
+// 
+//// 第七题
+//int main()
+//{
+//	char* p = "abcdef";
+//	printf("%d\n", strlen(p));//   6     
+//	printf("%d\n", strlen(p+1));//   b的地址往后数   5
+//	//printf("%d\n", strlen(*p));//    err  97非法访问内存，出错（编译器检查不出）
+//	//printf("%d\n", strlen(p[0]));// err   98非法访问内存， 出错（编译器检查不出）
+//	printf("%d\n", strlen(&p));// p是指针变量  我们在p的地址里面找\0, 和我们的字符串没有关系了，向后数 字符 的话就完全是随机值了
+//	printf("%d\n", strlen(&p+1));//  p是指针变量， &p+1 还是地址，是p地址的地址，随机值
+//	printf("%d\n", strlen(&p[0]+1));// 第二个元素的地址    5
+//	return 0;
+//}
+// 
+// 
+// 第八题
+// 
+// 
 int main()
 {
-	char arr[] = "abcdef";// abcdef\0
-	printf("%d\n", strlen(arr));//     
-	printf("%d\n", strlen(arr+0));//   
-	printf("%d\n", strlen(*arr));//
-	printf("%d\n", strlen(arr[1]));//
-	printf("%d\n", strlen(&arr));//   
-	printf("%d\n", strlen(&arr+1));//  
-	printf("%d\n", strlen(&arr[0]+1));// 
+	int a[3][4] = { 0 };
+	printf("%d\n", sizeof(a));//表示整个数组 12*4  =  48字节
+	printf("%d\n", sizeof(a[0][0]));//第一行第一个元素 4字节
+	printf("%d\n", sizeof(a[0]));//第二行  4*4 16个字节
+	//我们知道这个二维数组三行四列，
+	//我们访问每行的元素 是 a[0][i]  a[1][i]  a[2][i] a[3][i] 
+	//二维数组的理解： 
+	//可以把二维数组想象成一维数组， 二维数组的每一行是一个一维数组
+	//a[0]单独放在sizeof内部，计算的就是第一行的大小
+	//
+	printf("%d\n", sizeof(a[0]+1));//
+	printf("%d\n", sizeof(*(a[0]+1)));//
+	printf("%d\n", sizeof(a+1));//
+	printf("%d\n", sizeof(*(a+1)));//
+	printf("%d\n", sizeof(&a[0]+1));//
+	printf("%d\n", sizeof(*(&a[0]+1)));//
+	printf("%d\n", sizeof(*a));//
+	printf("%d\n", sizeof(a[3]));//
 	return 0;
 }
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
 // 
 // 
 // 
