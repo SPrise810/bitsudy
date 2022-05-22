@@ -543,69 +543,88 @@
 //// cmp是一个比较函数，      待比较的两个元素的地址
 ////返回类型是Int,   有三种值  大于0的数  0   小于0的数
 //);
-struct stu
+//struct stu
+//{
+//	char name[10];
+//	int age;
+//	int score;
+//};
+//int _int(const void* e1, const void* e2)
+//{
+//	//return ((int*)e1 - (int*)e2);
+//	return   (*(int*)e1 - *(int*)e2);
+//
+//}
+//int _char(const void* e1, const void* e2)
+//{
+//	return (*(char*)e1 - *(char*)e2);
+//}
+//int _struct(const void* e1, const void* e2)
+//{
+//	//return (cmp((strcut stu->name*)e1,));
+//	//return (cmp((struct stu*)e1->name, (struct stu*)e2->name));
+//	return strcmp(((struct stu*)e2)->name, ((struct stu*)e1)->name);
+//}
+//int main()
+//{
+//	struct stu s[3] = { {"daming",15,100},{"lihua",16,120},{"lili",17,140} };
+//	int arr[10] = { 3,1,6,5,2,9,7,8,10 };
+//	char arr2[10] = { "gbcdaef" };
+//	//char arr2[10] = { 'b','c','a','e','g'};
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int width = sizeof(arr[0]);
+//	qsort(arr, sz, width, _int);
+//	int i = 0;
+//	int sz2 = sizeof(arr2) / sizeof(arr2[0]);
+//	int width2 = sizeof(arr2[0]);
+//	qsort(arr2, sz2, width2, _char);
+//	int sz3 = sizeof(s) / sizeof(s[0]);
+//	int width3 = sizeof(s[0]);
+//	qsort(s, sz3, width3, _struct);
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//	for (i = 0; i < sz2; i++)
+//	{
+//		printf("%c ", arr2[i]);
+//	}
+//	printf("\n");
+//
+//	for (i = 0; i < 3; i++)
+//	{
+//		printf("%s %d %d", &s[i].name, &s[i].age, &s[i].score);
+//		printf("\n");
+//	}
+//	printf("\n");
+//	return 0;
+//}
+//// 
+// 
+// 
+// 
+// 
+//1.参考答案
+void myqsort(void* base, size_t nitems, size_t size, int(*compar)(const void*, const void*))
 {
-	char name[10];
-	int age;
-	int score;
-};
-int _int(const void* e1, const void* e2)
-{
-	//return ((int*)e1 - (int*)e2);
-	return   (*(int*)e1 - *(int*)e2);
+	int i, j;
+	char* st = (char*)base; //void *不方便加减，用char *加减轻松且字节跳转为1，方便控制。
+	char tmp[16]; //考虑到long double类型，临时空间做成16字节比较保险
 
-}
-int _char(const void* e1, const void* e2)
-{
-	return (*(char*)e1 - *(char*)e2);
-}
-int _struct(const void* e1, const void* e2)
-{
-	//return (cmp((strcut stu->name*)e1,));
-	//return (cmp((struct stu*)e1->name, (struct stu*)e2->name));
-	return strcmp(((struct stu*)e2)->name, ((struct stu*)e1)->name);
-}
-int main()
-{
-	struct stu s[3] = { {"daming",15,100},{"lihua",16,120},{"lili",17,140} };
-	int arr[10] = { 3,1,6,5,2,9,7,8,10 };
-	char arr2[10] = { "gbcdaef" };
-	//char arr2[10] = { 'b','c','a','e','g'};
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	int width = sizeof(arr[0]);
-	qsort(arr, sz, width, _int);
-	int i = 0;
-	int sz2 = sizeof(arr2) / sizeof(arr2[0]);
-	int width2 = sizeof(arr2[0]);
-	qsort(arr2, sz2, width2, _char);
-	int sz3 = sizeof(s) / sizeof(s[0]);
-	int width3 = sizeof(s[0]);
-	qsort(s, sz3, width3, _struct);
-	for (i = 0; i < sz; i++)
+	for (i = 0; i < nitems - 1; i++)
 	{
-		printf("%d ", arr[i]);
+		for (j = 0; j < nitems - 1 - i; j++) //冒泡常用循环头
+		{
+			if (compar(st + j * size, st + (j + 1) * size)) //比较的时候跳转注意乘size
+			{
+				memcpy(tmp, st + j * size, size); //交换操作用memcpy完成就不会出问题。
+				memcpy(st + j * size, st + (j + 1) * size, size);
+				memcpy(st + (j + 1) * size, tmp, size);
+			}
+		}
 	}
-	printf("\n");
-	for (i = 0; i < sz2; i++)
-	{
-		printf("%c ", arr2[i]);
-	}
-	printf("\n");
-
-	for (i = 0; i < 3; i++)
-	{
-		printf("%s %d %d", &s[i].name, &s[i].age, &s[i].score);
-		printf("\n");
-	}
-	printf("\n");
-	return 0;
 }
-// 
-// 
-// 
-// 
-// 
-// 
 // 
 // 
 // 
