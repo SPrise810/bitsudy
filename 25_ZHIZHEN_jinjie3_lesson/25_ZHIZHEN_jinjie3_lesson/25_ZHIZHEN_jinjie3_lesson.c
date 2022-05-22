@@ -475,13 +475,80 @@
 // 
 // 
 // 
+// 作业练习，1.模拟实现qsort函数
 // 
 // 
+//int by_int(int a,int b)
+//int by_int(const void*e1,const void*e2)
+//{
+//	return (*(int*)e1 - *(int*)e2);
+//}
+////void swap(const void* e1, const void* e2, int width)
+//void swap(char* p1, char* p2, int width)
+//{
+//	//08 00 00 00  /  07 00 00 00
+//	int i = 0;
+//	for (i = 0; i < width; i++)
+//	{
+//		char tmp = *p1;
+//		*p1 = *p2;
+//		*p2 = tmp;
+//		*p1++;
+//		*p2++;
+//	}
+//}
+////void fun(int arr[], int sz, int width, int(*by_int)())//起始位置指针类型不应该确定
+//void fun(void* base,int sz,int width,int(*by_int_p)(const void*e1,const void* e2))//by_int回调函数
+//{
+//	int i = 0;
+//	int j = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		for (j = 0; j < sz - i-1; j++)
+//		{
+//			if (by_int_p((char*)base + width * j, ((char*)base + width * (j + 1))) > 0)//判断函数
+//			{
+//				//int tmp = arr[j];
+//				//	arr[j] = arr[j+1];
+//				//	arr[j+1]=tmp;
+//				swap((char*)base + width * j, (char*)base + width * (j + 1), width);//使用交换函数
+//			}
+//		}
+//	}
+//}
+//#include<stdlib.h>
+//int main()
+//{
+//	int arr[] = { 7,1,3,4,2,5,6,9,10 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int width = sizeof(arr[0]);
+//	fun(arr,sz, width, by_int);
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 // 
 // 
+// 作业练习2， 使用qsort函数
+//  
 // 
 // 
-// 
+struct stu
+{
+	char name[10];
+	int age;
+	int score;
+};
+int main()
+{
+	int arr[10] = { 3,1,6,3,2,9,7,8,10 };
+	char arr2[10] = { "hahahaha" };
+
+	return 0;
+}
 // 
 // 
 // 
