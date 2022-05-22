@@ -354,7 +354,7 @@
 //	size_t num,//数组元素个数
 //	size_t size,//一个元素的字节大小
 //	int (*compar)(const void*e1, const void*e2)//函数指针 
-//// cmp是一个比较函数，      待比较的两个元素的地址
+//// compar是一个比较函数，      待比较的两个元素的地址
 ////返回类型是Int,   有三种值  大于0的数  0   小于0的数
 //);
 // 
@@ -536,17 +536,68 @@
 //  
 // 
 // 
+//void qsort(void* base,//待排序数据的其实位置
+//	size_t num,//数组元素个数
+//	size_t size,//一个元素的字节大小
+//	int (*compar)(const void*e1, const void*e2)//函数指针 
+//// cmp是一个比较函数，      待比较的两个元素的地址
+////返回类型是Int,   有三种值  大于0的数  0   小于0的数
+//);
 struct stu
 {
 	char name[10];
 	int age;
 	int score;
 };
+int _int(const void* e1, const void* e2)
+{
+	//return ((int*)e1 - (int*)e2);
+	return   (*(int*)e1 - *(int*)e2);
+
+}
+int _char(const void* e1, const void* e2)
+{
+	return (*(char*)e1 - *(char*)e2);
+}
+int _struct(const void* e1, const void* e2)
+{
+	//return (cmp((strcut stu->name*)e1,));
+	//return (cmp((struct stu*)e1->name, (struct stu*)e2->name));
+	return strcmp(((struct stu*)e2)->name, ((struct stu*)e1)->name);
+}
 int main()
 {
-	int arr[10] = { 3,1,6,3,2,9,7,8,10 };
-	char arr2[10] = { "hahahaha" };
+	struct stu s[3] = { {"daming",15,100},{"lihua",16,120},{"lili",17,140} };
+	int arr[10] = { 3,1,6,5,2,9,7,8,10 };
+	char arr2[10] = { "gbcdaef" };
+	//char arr2[10] = { 'b','c','a','e','g'};
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int width = sizeof(arr[0]);
+	qsort(arr, sz, width, _int);
+	int i = 0;
+	int sz2 = sizeof(arr2) / sizeof(arr2[0]);
+	int width2 = sizeof(arr2[0]);
+	qsort(arr2, sz2, width2, _char);
+	int sz3 = sizeof(s) / sizeof(s[0]);
+	int width3 = sizeof(s[0]);
+	qsort(s, sz3, width3, _struct);
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+	for (i = 0; i < sz2; i++)
+	{
+		printf("%c ", arr2[i]);
+	}
+	printf("\n");
 
+	for (i = 0; i < 3; i++)
+	{
+		printf("%s %d %d", &s[i].name, &s[i].age, &s[i].score);
+		printf("\n");
+	}
+	printf("\n");
 	return 0;
 }
 // 
