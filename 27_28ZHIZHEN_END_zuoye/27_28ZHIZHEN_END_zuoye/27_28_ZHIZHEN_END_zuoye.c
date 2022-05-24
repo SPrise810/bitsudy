@@ -58,7 +58,144 @@
 // 
 // 
 // 
+// 作业讲解：
+//变种水仙花数 
 // 
+// #include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 10000; i < 100000; i++)
+//	{
+//		if (((i % 10) * (i / 10) + (i % 100) * (i / 100) + (i % 1000) * (i / 1000) + (i % 10000) * (i / 10000)) == i)
+//		{
+//			printf("%d ", i);
+//		}
+//	}
+//	return 0;
+//}
 // 
 //  
+// 作业讲解：
+//int main()
+//{
+//	int i = 0;
+//	for (i = 10000; i < 99999; i++)
+//	{
+//		int sum = 0;
+//		int j = 0;
+//		for (j = 1; j <= 4; j++)
+//		{
+//				int m = i % (int)pow(10, j);
+//				int n = i / (int)pow(10, j);
+//				sum += m * n;
+//		}
+//		if (sum == 1)
+//		{
+//			printf("%d", i);
+//		}
+//	}
+//	return 0;
+//}
+//// 
+// 
+//解析答案写的真好
 //
+//#include <stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 10000; i <= 99999; i++)
+//	{
+//		//判断i是否为lily number
+//		int j = 10;
+//		int sum = 0;
+//		int tmp = i;
+//		for (j = 10; j <= 10000; j *= 10)
+//		{
+//			sum += (tmp % j) * (tmp / j);
+//		}
+//		if (sum == i)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+//
+//
+//
+//判断字母
+//
+//int main()
+//{
+//    char c;
+//    scanf("%c", &c);
+//    if (('a' <= c) && (c <= 'z'))
+//    {
+//        printf("YES\n");
+//    }
+//    else if (('A' <= c) && (c <= 'Z'))
+//        printf("YES\n");
+//    else
+//        printf("NO\n");
+//    return 0;
+//}
+// 鹏哥讲的
+//int main()
+//{
+//	int ch = getchar();
+//	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+//		printf("YES\n");
+//	else
+//		printf("NO\n");
+//	return 0;
+//
+//}
+// 
+// 
+//参考答案
+// 
+// 
+int main()
+{
+    int ch = 0;
+    while ((ch = getchar()) != EOF)
+    {
+        //判断字母
+        //if((ch>='A' && ch<='Z') || (ch>='a' && ch<='z'))
+        if (isalpha(ch))//呦呦呦，是个函数赖
+        {
+            printf("YES\n");
+        }
+        else
+        {
+            printf("NO\n");
+        }
+        //清理掉\n
+        getchar();
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
