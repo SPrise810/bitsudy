@@ -41,20 +41,20 @@
 //第八题 
 // 
 // 
-int main()
-{
-	char* c[] = { "ENTER","NEW","POINT","FIRST" };
-	char** cp[] = { c + 3,c + 2,c + 1,c };
-	char*** cpp = cp;
-	printf("%s\n", **++cpp);
-	printf("%s\n", *--*++cpp+3);
-	//先++  -- 然后*  最后+3
-	printf("%s\n", *cpp[-2]+3);
-	//承接上一步，**（cpp-2)-->c+3的地址，"FIRST"然后加 3 
-	printf("%s\n", cpp[-1][-1]+1);
-	//*(*(CPP-1)-1)+1
-	return 0;
-}
+//int main()
+//{
+//	char* c[] = { "ENTER","NEW","POINT","FIRST" };
+//	char** cp[] = { c + 3,c + 2,c + 1,c };
+//	char*** cpp = cp;
+//	printf("%s\n", **++cpp);
+//	printf("%s\n", *--*++cpp+3);
+//	//先++  -- 然后*  最后+3
+//	printf("%s\n", *cpp[-2]+3);
+//	//承接上一步，**（cpp-2)-->c+3的地址，"FIRST"然后加 3 
+//	printf("%s\n", cpp[-1][-1]+1);
+//	//*(*(CPP-1)-1)+1
+//	return 0;
+//}
 // 
 // 
 // 
