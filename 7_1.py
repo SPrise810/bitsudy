@@ -144,7 +144,6 @@
 
 # 7.3.3 使用用户输入来填充字典
 
-#设置一个标志，指出调查是否继续
 responses={}
 polling_active=True
 while polling_active:
