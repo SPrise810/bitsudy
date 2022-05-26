@@ -60,10 +60,19 @@
 #  message=input(promot)
 #  print(f"{message} \n那个输入‘quit’就退出了\n")
 
+#我们对该程序再次进行一点改进，上一个程序中，我们将关闭循环的钥匙 'quit' 同样也打印出来，这是一个美中不足之处
+#对此我们进行修改
 
+# promot="快写点东西给我测试用 "
+# promot+="\n哥们，来一个赖： "
+# message=""
+# while message!='quit':
+#  message=input(promot)
+#  if message!='quit':
+#   print(f"{message} \n那个输入‘quit’就退出了\n")
 
-
-
+#7.2.3
+#使用标志：
 
 
 
