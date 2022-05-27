@@ -155,29 +155,107 @@
 //参考答案
 // 
 // 
+//int main()
+//{
+//    int ch = 0;
+//    while ((ch = getchar()) != EOF)
+//    {
+//        //判断字母
+//        //if((ch>='A' && ch<='Z') || (ch>='a' && ch<='z'))
+//        if (isalpha(ch))//呦呦呦，是个函数赖
+//        {
+//            printf("YES\n");
+//        }
+//        else
+//        {
+//            printf("NO\n");
+//        }
+//        //清理掉\n
+//        getchar();
+//    }
+//    return 0;
+//}
+//
+//
+// 第二小节开始：
+//指针数据类型声明的是指针实际指向内容的数据类型
+//野指针是指向未分配或者已经释放的内存地址
+// 
+//我们后面会学
+//malloc free calloc realoc  函数  是负责动态内存管理的
+//
+// 
+//int main()
+//{
+//	int a = 10;//4字节
+//	int arr[10] = { 0 };//40字节
+//	
+//	//我们忽然想要扩展arr数组的内存空间，那么该如何去做
+//	//那么就需要动态管理内存
+//	//malloc  申请空间
+//	//free  回收空间
+//	// 
+//	return 0;
+//}
+// 
+// 
+// 数组指针  是一种 指针，指向数组
+// int(*a[10])(int)   函数指针的数组
+// 
+// 
+// 字符串左旋：
+void reverse(char* left, char* right)
+{
+	while (left < right)
+	{
+		char tmp = *left;
+		*left = *right;
+		*right = tmp;
+		left++;
+		right--;
+	}
+}
+void fun(char *arr,int k)
+{
+	//ABCDEF
+
+	int i = 0;
+	int j = 0;
+	int len=strlen(arr);
+	reverse(arr, arr + k - 1);//输入数字，控制字符串逆序
+	reverse(arr + k, arr + k - 1);
+	reverse(arr, arr + len - 1);
+	//char tmp = 0;
+	//for (j = 0; j < k%len; j++)//这里有优化  k--> k%len
+	//{
+	//	tmp = *arr;
+	//	for (i = 0; i < len - 1; i++)
+	//	{
+	//		*(arr + i) = *(arr + i + 1);
+	//	}
+	//	*(arr + len - 1) = tmp;
+	//}
+}
+#include<string.h>
 int main()
 {
-    int ch = 0;
-    while ((ch = getchar()) != EOF)
-    {
-        //判断字母
-        //if((ch>='A' && ch<='Z') || (ch>='a' && ch<='z'))
-        if (isalpha(ch))//呦呦呦，是个函数赖
-        {
-            printf("YES\n");
-        }
-        else
-        {
-            printf("NO\n");
-        }
-        //清理掉\n
-        getchar();
-    }
-    return 0;
+	char arr[10] = "ABCDEF";
+	//左旋字符串
+	int k = 0;
+	scanf_s("%d",&k);
+	fun(arr, k);
+	printf("%s", arr);
+	return 0;
 }
-
-
-
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+//
 
 
 
