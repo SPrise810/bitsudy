@@ -15,9 +15,9 @@
 
 #8.1.1 向函数传递信息
 
-def greet_user(name):
-    print(f"Hello,{name.title()}!")
-greet_user('sunpeng')#很像传递参数
+# def greet_user(name):
+#     print(f"Hello,{name.title()}!")
+# greet_user('sunpeng')#很像传递参数
 
 #在函数的圆括号里添加变量，令函数接受我们给变量指定的任何值，在我们调用的时候就可以传递给它
 
@@ -31,13 +31,22 @@ greet_user('sunpeng')#很像传递参数
 
 #8.2.1 位置实参
 
-def describe(animal,name):
+# def describe(animal,name):
+#     """显示动物信息"""
+#     print(f"\n I have a {animal}.")
+#     print(f"my{animal}'s name is {name}")
+# describe('cat','miaomiao')
+
+# 8.2.2
+
+def describe(animal,petname):
     """显示动物信息"""
     print(f"\n I have a {animal}.")
-    print(f"my{animal}'s name is {name}")
-describe('cat','miaomiao')
+    print(f"my{animal}'s name is {petname}")
+# describe('cat','miaomiao')
+describe(animal='cat',petname='lili')
 
-
+#关键字实参是传递给函数的名称值对
 
 
 
