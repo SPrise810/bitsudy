@@ -39,14 +39,29 @@
 
 # 8.2.2
 
-def describe(animal,petname):
+# def describe(animal,petname):
+#     """显示动物信息"""
+#     print(f"\n I have a {animal}.")
+#     print(f"my{animal}'s name is {petname}")
+# # describe('cat','miaomiao')
+# describe(animal='cat',petname='lili')
+# describe(petname='lili',animal='cat')
+
+#关键字实参是传递给函数的名称值对。因为直接在实参中将名称和值关联起来，所以向函数传递实参的时候不会混淆,即使交换顺序，也不会乱套
+
+#8.2.3 默认值
+#编写函数的时候可以给每个形参指定 默认值。
+# 在调用函数中给形参提供了实参时，python将使用指定的实参值内容。 否则将使用形参的 默认值
+# 指定默认值，可以在函数调用中省略相应的形参。
+# 使用默认值可以简化函数调用，更加清楚函数的典型用法
+
+# def describe(animal='cat',petname):  这里的顺序有固定用法
+def describe(petname,animal='cat'):
     """显示动物信息"""
     print(f"\n I have a {animal}.")
     print(f"my{animal}'s name is {petname}")
-# describe('cat','miaomiao')
-describe(animal='cat',petname='lili')
+describe(petname='lili')
 
-#关键字实参是传递给函数的名称值对
 
 
 
