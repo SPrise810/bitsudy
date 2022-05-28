@@ -60,9 +60,11 @@ def describe(petname,animal='cat'):
     """显示动物信息"""
     print(f"\n I have a {animal}.")
     print(f"my{animal}'s name is {petname}")
-describe(petname='lili')
+describe(petname='longlong')
+describe(petname='lili',animal='dog')# 我们修改值，会忽略默认值，默认值这里可以认为是保底的
 
-
+#8.2.4 等效的函数调用
+# 直接输入参数，或者使用变量传参，这些都是函数调用的等效方式
 
 
 
