@@ -168,6 +168,80 @@
 # name=['daming','lihua','lili','longlong']
 # fun(name)
 
-#8.5在函数中修改列表
+#8.4.1在函数中修改列表
 # 将列表传递给参数后，函数就可以对其进行修改，在函数中对列表的任何修改都是永久性的 永久性 永久性 永久性
+
+# """首先创建一个列表，其中包含一些要打印的设计"""
+# design=['a','b','c']
+# completed_design=[]
+# """模拟打印每个设计，直到没有未打印的设计为止"""
+# """打印每个设计后，都将其移动到列表completed_design中"""
+# while design:
+#     current_design=design.pop()
+#     print(f"print model: {current_design}")
+#     completed_design.append(current_design)
+# #显示打印好的模型
+# print("打印好的模型有：")
+# for a in completed_design:
+#     print(a)
+#     print(design)#看看是不是已经被修改了
+
+#为了提高效率，我们编写两个函数 一个负责处理打印设计，另一个概述打印了哪些内容
+
+# def print_moedels(un_designs,co_designs):
+#     """
+#     模拟打印每个设计，直到没有未打印的设计为止
+#     打印每个设计后，都将其移动到列表co_designs
+#     """
+#     while un_designs:
+#         current_design=un_designs.pop()
+#         print(f"打印：{current_design}")
+#         co_designs.append(current_design)
+# def show_completed_models(co_designs):
+#     """显示打印好的所有模型类型"""
+#     print(f"\n这些模型被打印了")
+#     for a in co_designs:
+#         print(a)
+# un_designs=['a','b','c']
+# co_designs=[]
+# print_moedels(un_designs,co_designs)
+# show_completed_models(co_designs)
+
+#8.4.2 禁止函数修改列表：
+#有时候需要禁止函数修改列表，我们以 上面的代码为例
+#如果我们需要保存un_designs列表，那么我们可以使用传递列表的副本而非原件的方法保存un_designs
+
+# #要将列表的副本传递给函数，可以这么做：
+# function_name(list_name[:])
+# # 切片表示法[:] 创建列表的副本，在上一个程序中，如果不想清空未打印的设计列表，可以参考下面的函数调用方式：
+# print_models(un_designs[:],co_designs)
+
+def print_moedels(un_designs, co_designs):
+    """
+    模拟打印每个设计，直到没有未打印的设计为止
+    打印每个设计后，都将其移动到列表co_designs
+    """
+    while un_designs:
+        current_design=un_designs.pop()
+        print(f"打印：{current_design}")
+        co_designs.append(current_design)
+def show_completed_models(co_designs):
+    """显示打印好的所有模型类型"""
+    print(f"\n这些模型被打印了")
+    for a in co_designs:
+        print(a)
+un_designs=['a','b','c']
+co_designs=[]
+print_moedels(un_designs[:],co_designs)#*********修改点***********，传递一个列表副本
+show_completed_models(co_designs)
+
+
+
+
+
+
+
+
+
+
 
