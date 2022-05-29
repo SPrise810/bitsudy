@@ -109,14 +109,14 @@
 
 #这个函数还可以进行扩展，使其接受可选值。
 
-def build_person(fname,lname,age=None):
-    """返回一个字典，其中包含有一个人的信息"""
-    person={'fist_name':fname,'last_name':lname}
-    if age:
-        person['age']=age
-    return person
-musican=build_person('da','ming',age=27)
-print(musican)
+# def build_person(fname,lname,age=None):
+#     """返回一个字典，其中包含有一个人的信息"""
+#     person={'fist_name':fname,'last_name':lname}
+#     if age:
+#         person['age']=age
+#     return person
+# musican=build_person('da','ming',age=27)
+# print(musican)
 
 #说实话，我觉得这个挺离谱的，但这就是python的语法特点嘛
 #分析一下哈，在函数定义中，新增了一个可选的形参age，并将其默认值设置为特殊值None(表示变量没有值）
@@ -127,10 +127,47 @@ print(musican)
 
 #8.3.4 结合使用函数和while循环
 
+# def build(fname,lname):
+#     person=f"{fname}{lname}"
+#     return person
+# # 无限循环
+# while True:
+#     print("告诉哥，你的名字：")
+#     fname=input("first_name")
+#     lname=input("last_name")
+#
+#     fullname=build(fname,lname)
+#     print(f"hello！ {fullname}")
 
+# 终止无限循环版本，加一个条件然后随便break一下就好了，简简单单
 
+# def build(fname,lname):
+#     person=f"{fname}{lname}"
+#     return person
+# # 无限循环
+# while True:
+#     print("告诉哥，你的名字")
+#     print("想退出么？想退出就输入 哥最帅 。")
+#     fname=input("first_name：")
+#     if fname=="哥最帅":
+#         break
+#     lname=input("last_name：")
+#     if lname=="哥最帅":
+#         break
+#
+#     fullname=build(fname,lname)
+#     print(f"hello！ {fullname}")
 
+#8.4 传递列表
+#向函数传递列表很有用，下面一个例子，向列表中所有人打招呼
 
+# def fun(name):
+#     for a in name:
+#         message=f"Hello, {a.title()}!"
+#         print(message)
+# name=['daming','lihua','lili','longlong']
+# fun(name)
 
-
+#8.5在函数中修改列表
+# 将列表传递给参数后，函数就可以对其进行修改，在函数中对列表的任何修改都是永久性的 永久性 永久性 永久性
 
