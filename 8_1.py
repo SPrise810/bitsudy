@@ -55,25 +55,77 @@
 # 指定默认值，可以在函数调用中省略相应的形参。
 # 使用默认值可以简化函数调用，更加清楚函数的典型用法
 
-# def describe(animal='cat',petname):  这里的顺序有固定用法
-def describe(petname,animal='cat'):
-    """显示动物信息"""
-    print(f"\n I have a {animal}.")
-    print(f"my{animal}'s name is {petname}")
-describe(petname='longlong')
-describe(petname='lili',animal='dog')# 我们修改值，会忽略默认值，默认值这里可以认为是保底的
+# # def describe(animal='cat',petname):  这里的顺序有固定用法
+# def describe(petname,animal='cat'):
+#     """显示动物信息"""
+#     print(f"\n I have a {animal}.")
+#     print(f"my{animal}'s name is {petname}")
+# describe(petname='longlong')
+# describe(petname='lili',animal='dog')# 我们修改值，会忽略默认值，默认值这里可以认为是保底的
 
 #8.2.4 等效的函数调用
 # 直接输入参数，或者使用变量传参，这些都是函数调用的等效方式
 
+#8.2.5 避免实参错误
+#避免或多或少参数
 
+#8.2.6 返回值
+#函数并非总是直接显示输出，它还可以处理一些数据，并返回1个或者1组值。
+#在函数中，可使用return语句将值返回到调用函数的代码行
 
+#8.3.1 返回简单值
 
+# def get_name(fname,lname):
+#     """返回整洁的姓名"""
+#     fullname=f"{fname} {lname}"
+#     return fullname.title()
+# myname=get_name('da','ming')
+# print(myname)
 
+#8.3.2 让实参变成可选的
 
+#我们使用默认值将可能不会传递的参数进行操作，令 实参变成可选的
 
+# def get_name(fname,lname,midname=''):
+#     """返回整洁的姓名"""
+#     if midname:
+#         fullname=f"{fname} {midname} {lname}"
+#     else:
+#         fullname=f"{fname} {lname}"
+#     return fullname.title()
+# myname=get_name('zhang','ming')
+# print(myname)
+# myname2=get_name('zhang','ming','da')
+# print(myname2)
 
+#8.3.3 返回字典
+# 函数可返回任何类型的值，包括列表和字典等较复杂的数据结构。例如，下面的函数接受姓名的组成部分，并返回一个表示人的字典。
 
+# def build(fname,lname):
+#     person={'fist_name':fname,'last_name':lname}
+#     return person
+# musican=build('da','ming')
+# print(musican)
+
+#这个函数还可以进行扩展，使其接受可选值。
+
+def build_person(fname,lname,age=None):
+    """返回一个字典，其中包含有一个人的信息"""
+    person={'fist_name':fname,'last_name':lname}
+    if age:
+        person['age']=age
+    return person
+musican=build_person('da','ming',age=27)
+print(musican)
+
+#说实话，我觉得这个挺离谱的，但这就是python的语法特点嘛
+#分析一下哈，在函数定义中，新增了一个可选的形参age，并将其默认值设置为特殊值None(表示变量没有值）
+#我们可以将None 视为占位值。
+# 在条件测试里，None相当于False
+#******* 如果函数调用中包含形参age的值，这个值将被存储到字典当中。  *******
+#在任何情况下，这个函数都会存储人的姓名，但可以进行修改，使其同时存储有关人的其他信息
+
+#8.3.4 结合使用函数和while循环
 
 
 
