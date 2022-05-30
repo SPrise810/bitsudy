@@ -216,24 +216,93 @@
 # # 切片表示法[:] 创建列表的副本，在上一个程序中，如果不想清空未打印的设计列表，可以参考下面的函数调用方式：
 # print_models(un_designs[:],co_designs)
 
-def print_moedels(un_designs, co_designs):
-    """
-    模拟打印每个设计，直到没有未打印的设计为止
-    打印每个设计后，都将其移动到列表co_designs
-    """
-    while un_designs:
-        current_design=un_designs.pop()
-        print(f"打印：{current_design}")
-        co_designs.append(current_design)
-def show_completed_models(co_designs):
-    """显示打印好的所有模型类型"""
-    print(f"\n这些模型被打印了")
-    for a in co_designs:
-        print(a)
-un_designs=['a','b','c']
-co_designs=[]
-print_moedels(un_designs[:],co_designs)#*********修改点***********，传递一个列表副本
-show_completed_models(co_designs)
+# def print_moedels(un_designs, co_designs):
+#     """
+#     模拟打印每个设计，直到没有未打印的设计为止
+#     打印每个设计后，都将其移动到列表co_designs
+#     """
+#     while un_designs:
+#         current_design=un_designs.pop()
+#         print(f"打印：{current_design}")
+#         co_designs.append(current_design)
+# def show_completed_models(co_designs):
+#     """显示打印好的所有模型类型"""
+#     print(f"\n这些模型被打印了")
+#     for a in co_designs:
+#         print(a)
+# un_designs=['a','b','c']
+# co_designs=[]
+# print_moedels(un_designs[:],co_designs)#*********修改点***********，传递一个列表副本
+# show_completed_models(co_designs)
+
+#8.5 传递任意数量的实参
+#有时候不知道函数需要接受多少个实参，但是python允许函数从调用语句中收集任意数量的实参
+
+# def make_pizza(*toppings):
+#     """打印顾客点的所有配料"""
+#     print(toppings)
+# make_pizza('pepperoni')
+# make_pizza('mushrooms','green peppers','extra cheese')
+
+# 形参名*toppings中的星号* 让python创建一个名为toppings的空元组，并将收到的所有制封装到这个元组中。
+#函数体内的函数调用print()通过生成输出，
+
+# #将print()替换成一个循环，遍历配料列表并对顾客点的比萨进行描述：
+# def make_pizza(*topppings):
+#     print("这些是比萨的配料：")
+#     for a in topppings:
+#         print(f" {a}")
+# make_pizza('a')
+# make_pizza('b','c','d','e')
+
+#8.5.1 结合使用位置实参和任意数量实参
+# 如果让函数接受不同类型的实参，必须在函数定义中将接纳任意数量实参的形参放在最后。
+# python先匹配位置实参和关键字实参  ，再将余下的实参都收集到最后一个形参中
+
+# def make_pizza(size,*toppings):  # 接受列表
+#     """概述要制作的比萨"""
+#     print(f"要制作{size}型号的比萨")
+#     for a in toppings:
+#         print(f"这些配料为{a}")
+# make_pizza(12,'a','b','c')
+
+#8.5.2 使用任意数量的关键字实参
+# 有时候，需要接受任意数量的实参，但预先不知道传递给函数的会是什么样的信息。
+#这个时候，可将函数编写成能够接受任意数量的键值对--调用语句提供了多少就接受多少
+# 创建用户简介：
+
+# def build(first,last,**user_info):# 接受字典
+#     """创建一个字典，其中包含我们知道的有关用户的一切内容"""
+#     user_info['fname']=first
+#     user_info['lname']=last
+#     return user_info
+# user_profile=build('a','e',location='weifang',field='physics')
+# print(user_profile)
+
+#8.6 将函数存储在中
+
+##
+##今天疯狂的划水
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
