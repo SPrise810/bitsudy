@@ -291,19 +291,43 @@
 #     print(f"老八会为你制作一个{size}的比萨，带有这些配料：")
 #     for a in toppings:
 #         print(f"-{a}")
-import pizza_hanshu
-pizza_hanshu.make_pizza(16,'e')
+
+# import pizza_hanshu
+# pizza_hanshu.make_pizza(16,'e')
 
 #8.6.2 导入特定的函数
 #导入格式录下
 # from module_name import function_name
+# 通过逗号分隔函数名，可根据需要从模块中导入任意数量的函数
+#from module_name import function1,function2,fuction3
 
+#8.6.3使用as 给函数指定别名
+#如果要导入的函数名称可能与程序中现有的名称冲突，或者函数的名称太长，可指定简短而独一无二的别名
 
+# from pizza_hanshu import make_pizza as mp
+# mp(12,'a','v','d')
 
+# 8.6.4  使用 as 给模块指定别名
+# 我们可以给模块指定别的名称，通过给模块指定简短的别名，让你能够更轻松地调用模块中的函数 相比于 pizza_hanshu.make_pizza()  p.make_pizza() 更加简洁
 
+# import pizza_hanshu as p
+# p.make_pizza(13,'a','b','c')
 
+#8.6.5导入模块的所有函数
+#使用*星号运算符可以让python导入模块中的所有函数：
 
+# from pizza_hanshu import *
+# make_pizza(12,'a')
 
+#import 语句中的星号让python将模块pizza中的每一个函数都复制到这个程序文件中
+#由于导入了每个函数，可通过名称来调用每个函数，而无需使用句点表示法
+#但是这种操作还是有风险的，当python 遇到多个名称相同的函数或者变量，它将进而覆盖函数，而不是分别倒入所有的函数
+#最佳的做法是，要么汁倒入需要使用的函数，要么导入整个模块并使用句点表示法
+#我们讲这个只是为了别人写的时候你能看懂这是什么东西
+
+#8.7  函数编写指南
+#编写函数是，需要牢记几个细节，给函数指定描述性名称，只使用小写字母和下划线
+#每个函数都应该简要的阐述其功能的注释
 
 
 
