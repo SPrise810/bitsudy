@@ -284,6 +284,7 @@
 #下面我们将讲解 将 函数导入到模块中的多种方法
 
 #8.6.1  导入整个模块
+#import语句  import语句允许在当前运行的程序文件中使用模块的代码
 
 # def make_pizza(size,*toppings):
 #     """概述要制作的比萨"""
@@ -293,7 +294,9 @@
 import pizza_hanshu
 pizza_hanshu.make_pizza(16,'e')
 
-
+#8.6.2 导入特定的函数
+#导入格式录下
+# from module_name import function_name
 
 
 
