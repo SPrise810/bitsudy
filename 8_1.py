@@ -290,11 +290,8 @@
 #     print(f"老八会为你制作一个{size}的比萨，带有这些配料：")
 #     for a in toppings:
 #         print(f"-{a}")
-
-
-
-
-
+import pizza_hanshu
+pizza_hanshu.make_pizza(16,'e')
 
 
 
