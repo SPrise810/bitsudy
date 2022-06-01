@@ -279,14 +279,17 @@
 # user_profile=build('a','e',location='weifang',field='physics')
 # print(user_profile)
 
-#8.6 将函数存储在中
+#8.6 将函数存储在模块当中
+# 我们使用函数的时候，可以将其存储在独立的文件当中，隐藏函数的代码细节，将重点放在程序的高层逻辑
+#下面我们将讲解 将 函数导入到模块中的多种方法
 
-##
-##今天疯狂的划水
-#画起来
-####哗哗哗
-##！11
-###11
+#8.6.1  导入整个模块
+
+def make_pizza(size,*toppings):
+    """概述要制作的比萨"""
+    print(f"老八会为你制作一个{size}的比萨，带有这些配料：")
+    for a in toppings:
+        print(f"-{a}")
 
 
 
