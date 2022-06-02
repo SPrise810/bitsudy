@@ -52,7 +52,7 @@
 
 class Dog:
     """一次模拟小狗的简单尝试"""
-    def _init_(self,name,age):
+    def __init__(self, name, age):###两个下划线
         """初始化name 和 age"""
         self.name = name
         self.age = age
@@ -65,12 +65,17 @@ class Dog:
         """模拟小狗收到命令时打滚"""
         print(f"{self.name} 打滚了")
 
-my_dog = Dog('lili',6)
+my_dog = Dog('lili', 6)
 
 print(f"我狗名字是{my_dog.name}")
 print(f"今年岁数：{my_dog.age}")
 
+# 访问属性，可使用句点表示法
 
+#2，调用方法
+#根据Dog类创建实例后，就能使用句点表示法来调用Dog类中定义的任何方法了
+
+#我们
 
 
 
