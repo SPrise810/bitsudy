@@ -7,20 +7,20 @@
 #我们知道狗嘛，它也有名字 年龄   它会蹲下，打滚
 #根据狗 类创建的每个实际的例子都将存储名字和年龄，我们赋予了每条小狗蹲下（sit()) 和打滚（roll_over()) 的能力：
 
-class Dog:
-    """一次模拟小狗的简单尝试"""
-    def _init_(self,name,age):
-        """初始化name 和 age"""
-        self.name=name
-        self.age=age
-
-    def sit(self):
-        """模拟小狗收到命令时蹲下"""
-        print(f"{self.name} 现在坐下了")
-
-    def roll_over(self):
-        """模拟小狗收到命令时打滚"""
-        print(f"{self.name} 打滚了")
+# class Dog:
+#     """一次模拟小狗的简单尝试"""
+#     def _init_(self,name,age):
+#         """初始化name 和 age"""
+#         self.name=name
+#         self.age=age
+#
+#     def sit(self):
+#         """模拟小狗收到命令时蹲下"""
+#         print(f"{self.name} 现在坐下了")
+#
+#     def roll_over(self):
+#         """模拟小狗收到命令时打滚"""
+#         print(f"{self.name} 打滚了")
 
 #看起来我们接触到了很多新知识，需要注意的小细节也有很多，但是不要害怕，后面全是，慢慢熟悉呗咱就是说
 #根据约定： 首字母大写的名称指的是类
@@ -46,13 +46,29 @@ class Dog:
 #self.name=name 获取与形参相关联的值 并将其值赋给变量self.name，然后该变量被关联到当前创建的实例，
 #像这样通过实例访问的变量称为属性
 
+#9.1.2 根据类创建实例
+# 可将类看作有关如何创建实例的说明，Dog类是一系列说明，让python知道如何创建表示特定小狗的实例
+#我们下面创建一个表示特定小狗的实例
 
+class Dog:
+    """一次模拟小狗的简单尝试"""
+    def _init_(self,name,age):
+        """初始化name 和 age"""
+        self.name = name
+        self.age = age
 
+    def sit(self):
+        """模拟小狗收到命令时蹲下"""
+        print(f"{self.name} 现在坐下了")
 
+    def roll_over(self):
+        """模拟小狗收到命令时打滚"""
+        print(f"{self.name} 打滚了")
 
+my_dog = Dog('lili',6)
 
-
-
+print(f"我狗名字是{my_dog.name}")
+print(f"今年岁数：{my_dog.age}")
 
 
 
