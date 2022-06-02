@@ -50,6 +50,32 @@
 # 可将类看作有关如何创建实例的说明，Dog类是一系列说明，让python知道如何创建表示特定小狗的实例
 #我们下面创建一个表示特定小狗的实例
 
+# class Dog:
+#     """一次模拟小狗的简单尝试"""
+#     def __init__(self, name, age):###两个下划线
+#         """初始化name 和 age"""
+#         self.name = name
+#         self.age = age
+#
+#     def sit(self):
+#         """模拟小狗收到命令时蹲下"""
+#         print(f"{self.name} 现在坐下了")
+#
+#     def roll_over(self):
+#         """模拟小狗收到命令时打滚"""
+#         print(f"{self.name} 打滚了")
+#
+# my_dog = Dog('lili', 6)
+#
+# print(f"我狗名字是{my_dog.name}")
+# print(f"今年岁数：{my_dog.age}")
+
+# 访问属性，可使用句点表示法
+
+#2，调用方法
+#根据Dog类创建实例后，就能使用句点表示法来调用Dog类中定义的任何方法了
+
+#我们承接上面的程序
 class Dog:
     """一次模拟小狗的简单尝试"""
     def __init__(self, name, age):###两个下划线
@@ -69,15 +95,9 @@ my_dog = Dog('lili', 6)
 
 print(f"我狗名字是{my_dog.name}")
 print(f"今年岁数：{my_dog.age}")
-
-# 访问属性，可使用句点表示法
-
-#2，调用方法
-#根据Dog类创建实例后，就能使用句点表示法来调用Dog类中定义的任何方法了
-
-#我们
-
-
+my_dog.sit()
+my_dog.roll_over()
+#hhhhhhhhh
 
 
 
