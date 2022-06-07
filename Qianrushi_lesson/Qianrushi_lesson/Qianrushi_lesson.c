@@ -115,7 +115,116 @@
 // 我们开始写一写。
 // 
 // 
-// 
+#include<stdio.h>
+#include<sys/socket.h>
+#include<string.h>
+#include<sys/types.h>
+#include<arpa/inset.h> //转换大小端的宏，机器系统都是小端存储， 
+#include<unstd.h>
+int main()
+{
+	//开始进入构建服务器的步骤
+	int host_socket;
+	int net_socket;//网络通信套接字
+	//构建信息结构体
+	struct sockaddr_in serverSockAddr;//本地客户端的信息结构体
+	//使用驼峰法命名
+	strcut sockaddr_in clientSocketAddr;//网络客户端的网络信息结构体
+	int ret;//用作相关返回值使用
+	char recv_buf[1024] = { 0 };
+	char send_buf[1024] = { 0 };
+	//初始化用的，完成。
+	
+	//1.使用socket函数构建本地网卡套接字
+	host_socket=socket(AF_INET,SOCK_STREAM,0)；
+		//AF_INET是IPV4，  IPV4用TCP协议，即SOCK_STREAM
+		if (host_socket == -1)
+		{
+			perror("create socket failed");
+			return -1;
+		}
+	    //2.绑定服务器IP以及端口号
+	    //2.1构建网络信息结构体
+	serverSockAddr.sin_family = AF_INET;//结构体成员，代表协议族，协议族是IPV4
+
+	serverSockAddr.sin_port = htons(8888);//端口号
+	serverSockAddr.sin_addr.s_addr = htons(INADDR_ANY);
+	//本机中的任意一张网卡进来都可以链接
+	//类似于这个意思
+	//2.2 开始绑定 
+	//接受一下函数的返回值，仅用于判断
+	ret = bind(host_socket, (struct sockaddr*)&serverSockAddr, sizeof(serverSockAddr));
+		//进行结构体指针类型强制转换，然后&获取地址
+	if (ret == -1)
+	{
+		//报错
+		perror("服务器绑定失败");
+			//就是错误返回，这样就不需要printf，还得用格式符，乱七八糟的是不是
+		return -1;//绑定失败，返回负一呗
+	}
+	printf("服务器绑定成功\n");
+	//3.监听本地网卡套接字
+	ret = listen(host_socket, 0);//数字随便写都行，他就那么说的
+	if (ret == -1)
+	{
+		perror("服务器监听失败");
+			return -1;
+	}
+	//4.阻塞等待客户端的链接，并获取一个新的网络套接字
+	//因为我们获取网络套接字，大小需要进行核对，所以需要提供sizeof客户端的链接地址
+	//因为客户端发过来一个信息，我们要保存到一个结构体，需要维持结构体大小确定
+	net_socket_size = sizeof(clientSocketAddr);
+	net_socket = accept(host_socket, (struct socketaddr*)&clientSocketAddr, &net_socket_size);
+	if (net_socket == -1)
+	{
+		perror("获取套接字失败");//一般不会失败
+		return -1;
+	}
+	//获得了网络套接字后，也获得了一个新的套接字，那么下一步就可以开始通讯了
+	//只要有一个套接字过来证明就有新的链接过来了，我们可以打印一下
+	printf("有客户端链接成功\n");
+	//5.实现网络通信
+	//send 和 resev函数
+	//我们使用while循环
+	//只要我们的电脑不关机，那么就永远获取客户发来的相关信息
+	while (1)
+	{
+		//获取客户端的相关信息
+		recv(net_socket,recv_buf, sizeof(recv_buf),0);//新的网络套接字，
+		printf("服务器接收到客户端的信息是： %s\n", recv_buf);
+		//向客户端发送相关的信息
+		printf("请输入要向客户端发送的相关信息： \n");
+		scanf("%s", send_buf);
+		send(net_socket, send_buf, strlen(send_buf), 0);
+	}
+	ret = close(host_socket);//想要关了他,那么就关闭本地套接字
+	ret = close(net_socket);//网络套接字也关上
+
+	//刚写完，然后切换到下面的命令行，输入wd保存推出，然后想要编译一下看一看现象
+	//但是我们还没有写客户端呢，首先编译一下吧
+	//gcc server.c
+	//但是我们需要链接库文件
+	//这里不需要
+
+
+
+
+
+
+	return 0;
+
+
+
+
+
+
+
+
+
+
+
+}
+
 // 
 // 
 // 
