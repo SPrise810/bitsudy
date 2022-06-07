@@ -79,16 +79,28 @@
 // 成功返回实际接收到的字节数
 // 失败返回-1  
 // 
-// send函数
-// 参数
-// 功能：
+// send函数--recv网络           read write 比较通常
+// #include<sys/socket.h>
+// ssize_t send(int socket,const void *buffer,size_t length,int flags);
+// socket网络套接字
+// 服务器的套接字是通过accept函数记住
+// buffer 就是内存缓冲区
+// length 发出的字节数大小
+// flags  一般写个0就完了
+// 参数 
+// 功能
+// 返回值  发出的字节数
+// 其他的返回负一
 // 
+//
+// close()函数
+// 标识符需要回收
+// 看看它是个什么东西
+// #include<unistd.h>
+// int close(int fd);
+// 功能就是关闭套接字
+// 这就是搭建服务器和客户端的函数原型
 // 
-// 还有其余几个函数
-// 我明天再来啊
-// 主要是今天有点晚了，
-// 哥要洗洗睡了
-// 哥还要坚持努力哦
 // 
 // 
 // 
