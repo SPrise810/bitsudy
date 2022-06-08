@@ -205,32 +205,65 @@ int main()
 	//gcc server.c
 	//但是我们需要链接库文件
 	//这里不需要
-
-
-
-
-
-
 	return 0;
-
-
-
-
-
-
-
-
-
-
-
 }
+//这就是服务器构建流程
+// 就是上面注释里的四步
+// 
+// 
+// 
+// 
+// 
+// 写一写客户端，然后展示现象
+// 我们看一看客户端咋写，再重新  vim client.c
+#include<stdio.h>
+#include<string.h>
+#include<sys/types.h>  //宏
+#include<sys/socket.h>
+#include<arpa/inet.h>//宏
+int main()
+{
+	int sockfd;
+	int ret;
+	struct sockaddr_in_clientSockAddr;
+	char sendBuff[1024] = { 0 };
+	char recvBuff[1024] = { 0 };
+	//初始化完成
 
-// 
-// 
-// 
-// 
-// 
-// 
+	//1.构建客户端的第一步
+	//构建socket套接字，既是本地套接字，也是网络套接字
+	sockfd = socket(AF_STREAM, 0);
+	if (sockfd == -1)
+	{
+		perror("获取套接字失败\n");
+		return -1;
+	}
+	//2.构建信息结构体
+	clientSockAddr.sin_family = AF_INET;
+	clientSockAddr.sin_port = htons(8888);
+	clientSockAddr.sin_addr.s_addr = inet_addr("127.0.0.1");//
+	//3.链接服务器
+	ret = connect(sockfd, (struct sockaddr*)&clientSockAddr, sizeof(clientSockAddr));
+	if (ret == -1)
+	{
+		perror("链接服务器失败\n");
+		return -1;
+	}
+	printf("链接服务器成功")；
+		while (1)
+		{
+			printf("请输入要发送的数据\n");
+			scanf("%s", sendBuff);
+			send(scokfd, sendBuff, strlen(sendBuff), 0);
+			
+			//从服务器接收到的信息
+			recv(sockfd, recvBuff, sizeof(recvBuff),0);
+			printf("从服务器获取的数据是  %s\n",recvBuff);
+			
+		}
+	close(sockfd);
+	return 0;
+}
 // 
 // 
 // 
