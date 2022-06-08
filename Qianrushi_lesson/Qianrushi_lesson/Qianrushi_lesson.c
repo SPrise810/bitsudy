@@ -277,7 +277,8 @@ int main()
 // 
 // 学的核心就是网络和服务器
 // 
-// 
+// 然后我们的源码 都在FACEAI的文件里面  然后FACEAI.c  和  FACESERVER.c 和  CLIENT.c就是这些东西
+// FACEAI.c就是整体逻辑代码，调用的那俩程序好吧
 // 
 // 
 // 
