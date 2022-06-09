@@ -350,8 +350,32 @@ int main()
 		56         return -1;
 
 // 
-// 
-// 
+//  // 5. 等待客户端链接。 
+		61     while (1)
+			62     {
+			63         // 由于服务器不需要关闭，所以直接使用死循环来完成
+				64         printf("waiting client .....\n");
+			65
+				66         // 调用WaitClientConnect函数, 函数调用成功，返回的是客户端的网络套接字
+				67         clientfd = WaitClientConnect(sockfd, &cskaddr);
+			68
+				69         if (clientfd < 0)
+				70         {
+				71             printf("wait client connect error ...\n");
+				72             return -1;
+				73         }
+			74         else
+				75         {
+				76             printf("client  connect ok ...\n");
+				77         }
+			78
+				79         // 处理客户端发送过来的请求 
+				80         qf = 1;
+			81
+				82         // 循环处理客户端发送过来的消息 
+				83         while (qf)  // 当 qf == 1 的时候，说明这个是一个死循环 将qf置为 0 的时候说明处理完毕，可以退出消息处理
+				84         {
+				// 
 // 
 // 
 // 
