@@ -298,7 +298,34 @@ int main()
 // 
 // 
 // 
-// 
+// #include "Time.h"
+8 int main(int argc, const char* argv[])
+9 {
+	10     // 0. 创建需要使用的变量 
+		11     // 0.0 创建服务端的套接字文件
+		12     int sockfd;
+	13     // 0.1 定义百度类型的对象 
+		14     BaiduFaceApi * api;
+	15     // 0.2 定义数据库的句柄变量
+		16     sqlite3 * ppDb;
+	17     // 0.3 定义一个变量，来控制客户端发送过来的请求消息
+		18     int qf = 1;
+	19     // 0.4 接收客户端消息的数据
+		20     unsigned int type;
+	21     // 0.5 定义接收图片信息的变量
+		22     ImageInfo_t img;
+	23
+		24     // 0.7 定义一个发送给客户端的变量
+		25     char retval[128];
+	26
+		27     // 0.8 定义图片用到的相关内容
+		28     char tmpname[128];
+	29
+		30     // 0.9 定义日期类型的变量
+		31     char date[50] = { 0 };
+	32
+		33
+
 // 
 // 
 // 
