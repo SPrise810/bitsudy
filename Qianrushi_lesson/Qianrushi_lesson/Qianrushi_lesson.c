@@ -325,6 +325,29 @@ int main()
 		31     char date[50] = { 0 };
 	32
 		33
+		// 定义客户端的ip地址端口号 以及 clientfd的套接字文件
+		35     int clientfd;
+	36     struct sockaddr_in cskaddr;
+	37
+		38
+		39     // 1. 创建 tcp 服务器 调用FaceServer.c里面的CreateFaceServer 这个函数就会得到一个创建好的套接字文件
+		40     sockfd = CreateFaceServer();
+	41
+		42     // 2. 判断TCP是否创建成功
+		43     if (sockfd < 0)
+		44     {
+		45         printf("Create Face Server is  error ....\n");
+		46         return -1;
+		47     }
+	48
+		49     // 3. 初始化百度AI的接口   BaiDuApi.cpp 文件中
+		50     api = CreateBaiduFaceApi(); // 返回一个 BaiDUapi 类型的指针。
+	51
+		52     // 4. 初始化数据库 
+		53     if (CreateFaceSqlite(&ppDb) != SQLITE_OK)
+		54     {
+		55         printf("create sqlite error...\n");
+		56         return -1;
 
 // 
 // 
