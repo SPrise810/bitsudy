@@ -412,7 +412,26 @@ int main()
 
 					// 0.8 定义图片用到的相关内容
 					char tmpname[128];
+					// 0.9 定义日期类型的变量
+					char date[50] = { 0 };
 
+
+					// 定义客户端的ip地址端口号 以及 clientfd的套接字文件
+					int clientfd;
+					struct sockaddr_in cskaddr;
+
+
+					// 1. 创建 tcp 服务器 调用FaceServer.c里面的CreateFaceServer 这个函数就会得到一个创建好的套接字文件
+					sockfd = CreateFaceServer();
+
+					// 2. 判断TCP是否创建成功
+					if (sockfd < 0)
+					{
+						printf("Create Face Server is  error ....\n");
+						return -1;
+					}
+
+					// 3. 初始化百度AI的接口   BaiDuApi.cpp 文件中
 
 
 
