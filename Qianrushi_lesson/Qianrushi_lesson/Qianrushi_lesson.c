@@ -383,6 +383,19 @@ int main()
 // 
 // 
 //
+#include <stdlib.h>
+#include "FaceServer.h"
+#include "FaceAI.h"
+#include "Image.h"
+#include "BaiDuApi.h"
+#include "Sqlite.h"
+#include "Time.h"
+
+				int main(int argc, const char* argv[])
+				{
+					// 0. 创建需要使用的变量 
+					// 0.0 创建服务端的套接字文件
+					int sockfd;
 
 
 
