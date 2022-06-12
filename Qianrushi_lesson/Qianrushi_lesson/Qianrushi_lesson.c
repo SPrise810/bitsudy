@@ -396,6 +396,23 @@ int main()
 					// 0. 创建需要使用的变量 
 					// 0.0 创建服务端的套接字文件
 					int sockfd;
+					// 0.1 定义百度类型的对象 
+					BaiduFaceApi* api;
+					// 0.2 定义数据库的句柄变量
+					sqlite3* ppDb;
+					// 0.3 定义一个变量，来控制客户端发送过来的请求消息
+					int qf = 1;
+					// 0.4 接收客户端消息的数据
+					unsigned int type;
+					// 0.5 定义接收图片信息的变量
+					ImageInfo_t img;
+
+					// 0.7 定义一个发送给客户端的变量
+					char retval[128];
+
+					// 0.8 定义图片用到的相关内容
+					char tmpname[128];
+
 
 
 
