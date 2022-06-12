@@ -432,6 +432,209 @@ int main()
 					}
 
 					// 3. 初始化百度AI的接口   BaiDuApi.cpp 文件中
+					api = CreateBaiduFaceApi(); // 返回一个 BaiDUapi 类型的指针。
+
+   // 4. 初始化数据库 
+					if (CreateFaceSqlite(&ppDb) != SQLITE_OK)
+					{
+						printf("create sqlite error...\n");
+						return -1;
+					}
+
+
+					// 5. 等待客户端链接。 
+					while (1)
+					{
+						// 由于服务器不需要关闭，所以直接使用死循环来完成
+						printf("waiting client .....\n");
+
+						// 调用WaitClientConnect函数, 函数调用成功，返回的是客户端的网络套接字
+						clientfd = WaitClientConnect(sockfd, &cskaddr);
+
+						if (clientfd < 0)
+						{
+							printf("wait client connect error ...\n");
+							return -1;
+						}
+						else
+						{
+							printf("client  connect ok ...\n");
+						}
+
+						// 处理客户端发送过来的请求 
+						qf = 1;
+
+						// 循环处理客户端发送过来的消息 
+						while (qf)  // 当 qf == 1 的时候，说明这个是一个死循环 将qf置为 0 的时候说明处理完毕，可以退出消息处理
+						{
+							/*
+							 * 下面的类型是 客户端发送过来的请求 当为 0 的时候是注册， 1的时候是打卡 ， 2的时候是反馈数据库
+							 enum OperCode{
+								REGISTER=0,       //注册
+								RECOGNITION=1,    //打卡
+								CHECKDATA=2,      //反馈数据库
+								QUIT=3,            //退出
+								};
+							*/
+
+							// 1. 接收客户端发送过来的信息 recv 函数来进行接收 
+							if (recv(clientfd, &type, sizeof(type), 0) < 0) // 以阻塞的形式，来接收数据
+							{
+								printf("user  quit .... \n");
+								break;
+							}
+
+
+							// 通过 switch case 语句进行判断 
+							switch (type)
+							{
+							case REGISTER: // 用户注册逻辑
+							// 注册的数据里面有两个信息 1个是图片， 一个是姓名
+							// 当点击注册的时候，相当于将当时摄像头里面的图像，以及姓名发送过来 
+
+							// a. 获取图片信息. 包含了图片的大小， 和 员工名称
+								RecvImageInfo(clientfd, &img);
+
+								// b. 需要通过名称查询一下，该员工是否以及注册了
+								// 员工的信息都放在数据库中， 所以我们需要在数据库中通过姓名查找看一下学生是不是以及在里面了
+
+								if (CheckRegisterTableName(ppDb, img.imgname) != SQLITE_OK)
+								{
+									// 告诉数据库 员工已经存在
+									printf("register name exist\n");
+
+									// 将已经存在的信息告诉给客户端 
+									// 准备信息
+									snprintf(retval, sizeof(retval), "register name  exist %s, please retry", img.imgname);
+									send(clientfd, retval, sizeof(retval), 0); // 服务端发送给客户端消息
+
+									break;// 跳出循环
+								}
+								else
+								{ // 员工不在注册表中，需要注册 
+
+									// 注册学生信息(接收图片， 将图片存储到数据库中， 返回存储成功的信息)
+
+									// 将 name 没有重复的这件事情发送给客户端
+									snprintf(retval, sizeof(retval), "register name successful");
+									send(clientfd, retval, sizeof(retval), 0);
+
+									// 接收发送过来的图片信息
+									RecvSaveIamge(clientfd, &img, FACELIBDIR);
+
+									// 图片是发送过来了，但是没有办法做到验证图片里面的人是不是以及重复了 
+									// 拼接图片名称
+									snprintf(tmpname, sizeof(tmpname), "%s:%s.jpg", FACELIBDIR, img.imgname);
+									// 需要调用baidu接口进行比较 
+									if (Compare(api, tmpname, retval) == NULL) // 表示失败了，没有匹配成功
+									{
+										// 证明匹配成功了。
+										// 需要将数据插入到数据库中。ResisterTable 里面
+										InsertRegisterTableName(ppDb, img.imgname);
+
+										// 姓名和ID 发送过去。 
+										// 需要从数据库中查找以下姓名和id 
+										GetRegisterTableInfo(ppDb, img.imgname, retval);
+										// retval 这里面存储的就是 id:name 
+
+										// 当插入数据成功的时候买最好能给客户端发送过去。
+										send(clientfd, retval, sizeof(retval), 0);
+									}
+									else
+									{
+										// 表示没有匹配成功， 需要删除掉介绍到的图片信息 通过调用system函数来执行linux命令
+										// 1.准备好删除语句 
+										snprintf(retval, sizeof(retval), "rm %s:%s.jpg", FACELIBDIR, img.imgname);
+
+										// 2.将信息删除出去
+										system(retval);
+
+										// 3.将注册的信息发送回去
+										snprintf(retval, sizeof(retval), "register picture exits %s, please retry", img.imgname);
+										send(clientfd, retval, sizeof(retval), 0);
+									}
+
+								}
+								break;
+
+								// switch case 来进行打卡内容
+							case RECOGNITION: //  打卡信息
+								/*
+								 *  打卡信息逻辑
+								 *  1. 获取到照片的相信息 ， 拿到 名称和大小
+								 *  2. 接收图片
+								 *  3. 对图片信息和存储的员工信息，进行打卡对比
+								 *  4. 对比成功： 将打开信息存入到数据库中
+								 *     对比失败： 发送打卡失败的结果
+								 * */
+
+								 // 1. 获取到图片信息
+								RecvImageInfo(clientfd, &img); // 接收从客户端发送来的信息并且存入到 img 里面 
+
+								// 2. 接收图片 
+								RecvSaveIamge(clientfd, &img, FACECURDIR); // 将接收的图片存入到 FACECURDIR 这个路径里面
+
+								// 3. 进行人脸对比
+								// 3.1 准备好 tmpname这个文件吗 
+								snprintf(tmpname, sizeof(tmpname), "%s/%s.jpg", FACECURDIR, img.imgname);
+
+
+								if (Compare(api, tmpname, retval) == NULL)
+								{
+									// 比较失败
+									// Compare 函数当中的参数 retval是用来接收compare 的结果的。 
+									send(clientfd, retval, sizeof(retval), 0);
+
+								}
+								else
+								{
+									// 对比成功
+									// 1.反馈对比成功的员工的姓名
+									// 1.1. 反馈员工的信息 --- 数据库中查找获取  ---> 去注册表里面寻找 
+									GetRegisterTableInfo(ppDb, retval, retval);
+									// retval 是一个输出型的参数，如果上面的函数执行成功， retval 里面的值就是员工id 和姓名
+
+									// 2. 打印以下员工的信息和id 
+									printf("retval = %s\n", retval);
+
+									// 3.将员工的信息发送给客户端。   
+									send(clientfd, retval, sizeof(retval), 0);// 以阻塞的方式进行发送
+
+									// 4. 获取打卡的时间 
+									GetTime(date);
+
+									// 5. 将 id name date存入到数据库中。
+									InsertRecognitionTableName(ppDb, retval, date);
+								}
+								break;
+								// 查询数据库功能：
+							case CHECKDATA:
+								// 查询数据库内容， 是客户端的功能。 我们需要将linux 数据库, 发送给客户端。
+								ReturnSqliteFile(clientfd); // 将数据库，发送给客户端。
+
+
+							// 退出功能： 
+							case QUIT:
+
+								//退出逻辑
+								// 通过qf这个变量来控制的循环， 默认qf 为 1 是一个死循环。 只要将qf 置为0 
+								// 就可以退出循环了
+								qf = 0;
+								break;
+
+							}
+
+						}
+					}
+
+					//关闭数据库， 释放资源
+					CloseFaceSqlite(ppDb);
+
+					// 回收百度的api资源
+					delete api;
+					return 0;
+				}
+
 
 
 
