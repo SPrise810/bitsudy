@@ -100,10 +100,10 @@ def getWarp(img,ordered_points,size_wraped):
     return imgCropped
 
 if __name__ == "__main__":
-    #记录坐标的字典
+    #初始化坐标的字典
     dic_points={}
-    dic_points["ps"]=[]
-    dic_points["p_move"]=()
+    dic_points["ps"]=[]#列表
+    dic_points["p_move"]=()#元组，不可被修改
 
     #设置回调函数
     cv2.namedWindow('image')
