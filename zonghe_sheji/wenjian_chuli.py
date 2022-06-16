@@ -1,15 +1,8 @@
 import numpy as np
 import cv2
 import pytesseract
-"""
-1.利用放射变换实现图像校正
-2.构建源图像顶点与目标图像顶点的关系
-3.计算放射矩阵
-4.实现仿射变换
-"""
+import os
 
-
-# 收集所需图像
 def drawlines(img, dic_points):
     color = (0, 255, 0)  # 颜色形式为BGR  BLUE,GREEN,RED三原色
 
@@ -38,14 +31,17 @@ def drawlines(img, dic_points):
 
 #通过鼠标双击进行顶点坐标收集
 def points_collet(event,x,y,flags,param):
-    #参数解析： 鼠标动作，分别坐标xy，event的组合参数，param参数
-    #param参数在字典当中
+    #参数解析： 鼠标动作，分别坐标xy，event的组合参数，param即我们所需要使用的参数
+    #在主程序中我们可以看到param =dic_points字典
+    #字典中含有两个变量
+    # 一个是ps(points)四个图像顶点  用列表存储
+    # 另一个是一个是ps_move  记录一个运动点
     dic_points=param#将字典传入
 
     # 左键双击时
     if event == cv2.EVENT_LBUTTONDBLCLK: #进入条件，开始进行第一个点的存储
         if len(dic_points['ps'])>=4:
-            #顶点的数量>=4时，说明顶点坐标在上一个图片内容中已经存储，我们需要更新内容
+            #顶点的数量>=4时，说明顶点坐标在上一个图片内容中已经存储，我们需要新一轮的记录
             dic_points['ps']=[]#进行初始化
             dic_points['ps'].append((x,y))#将第一个坐标存储
         else:
@@ -58,7 +54,8 @@ def points_collet(event,x,y,flags,param):
         dic_points['p_move']=(x,y)
 
 
-#将照片通过顶点排序，然后进行图片平整度调节
+#将照片通过顶点排序
+# 进行图片平整度调节
 def reorder(points):
     points=np.array(points)
     ordered_points=np.zeros([4,2]) #4个点，2个坐标
@@ -78,7 +75,7 @@ def reorder(points):
 
 #实现图像的仿射变换，矫正图像
 #ordered_points: 需要变换的4个顶点
-#size_wraped: 变换后  图像的大小
+#size_wraped: 变换后  图像的大小(W,H)
 def getWarp(img,ordered_points,size_wraped):
     w,h=size_wraped#宽和高
 
@@ -91,58 +88,66 @@ def getWarp(img,ordered_points,size_wraped):
     #计算仿射矩阵
     matrix=cv2.getPerspectiveTransform(ps1,ps2)
 
-    #进行仿射变换
+    #进行矫正及仿射变换
     imgOutput=cv2.warpPerspective(img,matrix,(w,h))
 
     #对边界进行简单裁剪
     imgCropped =imgOutput[20:imgOutput.shape[0]-20,20:imgOutput.shape[1]-20]
+                                         #上下剪20   左右剪20
     imgCropped=cv2.resize(imgCropped,(w,h))
+    #调整图像大小到目标命令
     return imgCropped
+def store(text):
+    f = open('C:\\Users\\SP\\source\\repos\\bitsudy\\zonghe_sheji\\information.txt.txt', "x")
+    f.write(txt)
+'''main程序 '''
+#初始化坐标的字典
+dic_points={}
+dic_points["ps"]=[]#列表
+dic_points["p_move"]=()#元组，不可被修改
 
-if __name__ == "__main__":
-    #初始化坐标的字典
-    dic_points={}
-    dic_points["ps"]=[]#列表
-    dic_points["p_move"]=()#元组，不可被修改
+#设置回调函数
+cv2.namedWindow('image')
+cv2.setMouseCallback('image',points_collet,param=dic_points)
 
-    #设置回调函数
-    cv2.namedWindow('image')
-    cv2.setMouseCallback('image',points_collet,param=dic_points)
+#需要扫描的文件
+file_scan="paper.jpg"
 
-    #需要扫描的文件
-    file_scan="paper.jpg"
+#扫描文件的大小
+size_wraped=(420,600)#近似A4纸张的比例大小
 
-    #扫描文件的大小
-    size_wraped=(420,600)#近似A4纸张的比例大小
+#固定tesseract的位置
+pytesseract.pytesseract.tesseract_cmd='C:\\Users\\SP\\source\\tesseract.exe'
 
-    #定义tesseract的位置
-    pytesseract.pytesseract.tesseract_cmd='C:\\Users\\SP\\source\\tesseract.exe'
+while True:
+    img=cv2.imread(file_scan)#读入照片数据
 
-    while True:
-        img=cv2.imread(file_scan)
+    drawlines(img,dic_points)
 
-        drawlines(img,dic_points)
+    key=cv2.waitKey(10)&0xFF# 获取按键键值
+    cv2.imshow('image',img)#展示照片
 
-        key=cv2.waitKey(10)&0xFF
-        cv2.imshow('image',img)
+    if key==ord('q'):#退出
+        break
+    if key==ord('w'):#进行操作
+        key=0
+        if len(dic_points['ps'])==4:#是否已经收集到四个顶点
 
-        if key==ord('q'):
-            break
-        if key==ord('w'):
-            key=0
-            if len(dic_points['ps'])==4:
+            #图像仿射变换
+            ordered_points=reorder(dic_points['ps'])#进行顶点排序
+            img_Warped=getWarp(img,ordered_points,size_wraped)
+            #对我的图像进行矫正，参数：图像，排序顶点，图像大小
+            cv2.imshow("ImageWarped",img_Warped)
+            #经过仿射变换显示校正后的图像
 
-                #图像仿射变换
-                ordered_points=reorder(dic_points['ps'])
-                img_Warped=getWarp(img,ordered_points,size_wraped)
-                cv2.imshow("ImageWarped",img_Warped)
-
-                #颜色变换
-                img_Warped_RGB=cv2.cvtColor(img_Warped,cv2.COLOR_BGR2RGB)#转移颜色模式
-
-                #文字识别
-                txt=pytesseract.image_to_string(img_Warped_RGB,lang='chi_sim')
-                print(txt)
+            #首先进行颜色变换
+            img_Warped_RGB=cv2.cvtColor(img_Warped,cv2.COLOR_BGR2RGB)#转移颜色模式
+            #文字识别
+            txt=pytesseract.image_to_string(img_Warped_RGB,lang='chi_sim')
+            #参数     ：RGB图像  以及  语言模型
+            print(txt)
+            store(txt)
+            #存储文件信息
 
 
 
