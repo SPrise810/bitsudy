@@ -236,27 +236,64 @@ void fun(char *arr,int k)
 	//	*(arr + len - 1) = tmp;
 	//}
 }
-#include<string.h>
+//杨氏矩阵
+// 要求时间复杂度<  (O)n
+// 就是说我们不能按照顺序一个一个查找，而是要根据矩阵的特点规律
+// 进行优化，实现快速查找
+//有一个数字矩阵，矩阵的每一行从左到右是递增的，矩阵从上到下是递增的
+//这里的规律是右上角为判断基本点，因为右上角是所在行最大的元素，所在列最小的元素
+//请编写程序再这样的矩阵中查找某个数是否存在
+void find_k(int arr[3][3], int k, int r, int c)
+{
+	int x = 0;
+	int y = c - 1;
+	int flag = 1;
+	//右上角的元素位置xy
+	//while(1)不严谨容易死循环
+	while (x<r&& y>=0)
+	{
+		if (arr[x][y] < k)
+		{
+			x = x + 1;
+		}
+		else if (arr[x][y] > k)
+		{
+			y = y - 1;
+		}
+		else
+		{
+			flag = 0;
+			printf("找到了哈哈哈，下标是%d %d\n", x+1, y+1);
+			break;
+		}
+	}
+	if(flag)
+	printf("没找着");
+}
 int main()
 {
-	char arr[10] = "ABCDEF";
-	//左旋字符串
-	int k = 0;
-	scanf_s("%d",&k);
-	fun(arr, k);
-	printf("%s", arr);
+	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
+	int k = 11;
+	find_k(arr, k, 3, 3);
+
 	return 0;
 }
+//#include<string.h>
+//int main()
+//{
+//	char arr[10] = "ABCDEF";
+//	//左旋字符串
+//	int k = 0;
+//	scanf_s("%d",&k);
+//	fun(arr, k);
+//	printf("%s", arr);
+//	return 0;
+//}
 // 
 // 
 // 
 // 
-// 
-// 
-// 
-// 
-//
-
+// // 
 
 
 
