@@ -218,6 +218,7 @@
 //}
 
 //简单总结一下：  strcpy  strcat   strcmp  这些都是长度不受限制的函数
+//         字符串拷贝  字符串追加 字符串比较函数
 
 //那么我们后面讲的这些就是长度受限制的函数  strncpy strncat  strncmp
 //strncpy(arr1,arr2,6)
@@ -232,20 +233,180 @@
 //	return 0;
 //}
 
+//\0算是字符串中的内容，作为一个字符串的结束 标志存在
+//strncat 字符串追加函数
+//我们从被添加的字符串的\0位置开始找起
+//找到\0之后然后将我们需要添加的字符串 加到字符串的后面，加的同时我们将原字符串的
+//内容进行覆盖，再添加完之后，在末尾给字符串添加一个\0进行结尾
 
-//strncat 函数
+//int main()
+//{
+//	char arr1[20] = "abcdef";
+//	char arr2[] = "qwertyuiop";
+//	//char arr2[] = "qwe";
+//	strncat(arr1,arr2,5);//5个字符内容加一个\0
+//	printf("%s\n", arr1);
+//
+//	return 0;
+//}
 
+//自主实现
+//char* fun(char* arr1,char* arr2,int n)
+//{
+//	char* ret = arr1;
+//	int i = 0;
+//	while (*(arr1) != '\0')
+//	{
+//		arr1++;
+//	}
+//	for (i = 0; i < n; i++)
+//	{
+//		*(arr1) = *arr2;
+//		arr1++;
+//		arr2++;
+//	}
+//	*(++arr1) = '\0';
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[20] = {0};
+//	char arr2[20] = {0};
+//	int n = 0;
+//	gets(arr1);
+//	gets(arr2);
+//	scanf("%d", &n);
+//	printf("%s", fun(arr1, arr2, n)) ;
+//	return 0;
+//}
 
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "abcde";
+//	int ret = strncmp(arr1, arr2, 6);
+//	printf("%d", ret);
+//	return 0;
+//}
 
+//拓展： 
+//如果我们强行去比较字符串本身的大小，如下：
+//	char arr1[] = "abcdef";
+//	char arr2[] = "abcde";
+//if (arr1 < arr2)
+//{
+//	;
+//}
+//在这种情况下我们比较的是，两个字符串的地址
+//if ("abc" < "abcdef")
+//{
+//	;
+//}
+//这种情况下我们比较的是两个常量字符串的地址
+//char* p = "abc";实际上是将a的地址赋给了我们定义的指针p
 
+//自主实现 strncmp自定义范围字符串比较函数
+//int fun(char* arr1, char* arr2, int n)
+//{
+//	while (--n)
+//	{
+//		if (( * arr1 - *arr2) == 0)
+//		{
+//			arr1++;
+//			arr2++;
+//		}
+//		if ((*arr1 - *arr2) > 0)
+//		{
+//			return 1;
+//		}
+//		if ((*arr1 - *arr2) < 0)
+//		{
+//			return -1;
+//		}
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	char arr1[20] = { 0 };
+//	char arr2[20] = { 0 };
+//	gets(arr1);
+//	gets(arr2);
+//	int n;
+//	scanf("%d", &n);
+//	printf("%d",fun(arr1, arr2, n));
+//	return 0;
+//}
 
+//strstr函数（判断字符串的包含关系）
+//char * strstr(const char *str1,const char * str2);  返回类型为字符类型指针，
+//int main()
+//{
+//	char arr1[] = "abcdefabcdef";
+//	char arr_1[] = "abcdeqabcdef";
+//	char arr2[] = "cdef";
+//	char* ret=strstr(arr1, arr2);
+//	if (ret == NULL)
+//	{
+//		printf("没找到对应字符串\n");
+//	}
+//	else
+//		printf("%s\n", ret);
+//	//
+//	ret = strstr(arr_1, arr2);
+//	if (ret == NULL)
+//	{
+//		printf("没找到对应字符串\n");
+//	}
+//	else
+//		printf("%s\n", ret);
+//	return 0;
+//}
 
-
-
-
-
-
-
+//自主实现my_strstr()
+//其实我们的实现过程还是比较复杂的，说实话
+//例如 两个字符串分别为  abbbcdef 和 bbc 
+//我们要考虑一下上面的特殊字符串如何合理运行才能够正常完成其函数功能
+#include<assert.h>
+char* my_strstr(const char* arr1,const char* arr2)
+{
+	assert(arr1 && arr2);//若指针为空指针，指向的串就有问题了
+	const char* s1 = arr1; 
+	const char* s2 = arr2;
+	const char* cur = arr1;
+	while (*cur)//while (*cur != '\0')
+	{
+		s1 = cur;
+		s2 = arr2;
+		while (*s1&&*s2&&(* s1 == * s2))
+		{
+			s1++;
+			s2++;
+		}
+		if (*s2 == '\0')
+		{
+			return (char*)cur;
+		}
+		cur++;
+	}
+	return NULL;
+}
+//查找字串的时候其实还有一个更高效的，更经典的KMP算法，但我们这讲的是C语言，不是算法
+//想要进一步了解的可以在b站 搜索  比特大博哥
+int main()
+{
+	char arr1[100] = { 0 };
+	char arr2[100] = { 0 };
+	gets(arr1);
+	gets(arr2);
+		if (my_strstr(arr1, arr2) == NULL)
+		{
+			printf("没找到对应字符串\n");
+		}
+		else
+			printf("%s\n", my_strstr(arr1, arr2));
+	return 0;
+}
 
 
 
