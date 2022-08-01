@@ -367,46 +367,163 @@
 //其实我们的实现过程还是比较复杂的，说实话
 //例如 两个字符串分别为  abbbcdef 和 bbc 
 //我们要考虑一下上面的特殊字符串如何合理运行才能够正常完成其函数功能
-#include<assert.h>
-char* my_strstr(const char* arr1,const char* arr2)
-{
-	assert(arr1 && arr2);//若指针为空指针，指向的串就有问题了
-	const char* s1 = arr1; 
-	const char* s2 = arr2;
-	const char* cur = arr1;
-	while (*cur)//while (*cur != '\0')
-	{
-		s1 = cur;
-		s2 = arr2;
-		while (*s1&&*s2&&(* s1 == * s2))
-		{
-			s1++;
-			s2++;
-		}
-		if (*s2 == '\0')
-		{
-			return (char*)cur;
-		}
-		cur++;
-	}
-	return NULL;
-}
-//查找字串的时候其实还有一个更高效的，更经典的KMP算法，但我们这讲的是C语言，不是算法
-//想要进一步了解的可以在b站 搜索  比特大博哥
-int main()
-{
-	char arr1[100] = { 0 };
-	char arr2[100] = { 0 };
-	gets(arr1);
-	gets(arr2);
-		if (my_strstr(arr1, arr2) == NULL)
-		{
-			printf("没找到对应字符串\n");
-		}
-		else
-			printf("%s\n", my_strstr(arr1, arr2));
-	return 0;
-}
+//#include<assert.h>
+//char* my_strstr(const char* arr1,const char* arr2)
+//{
+//	assert(arr1 && arr2);//若指针为空指针，指向的串就有问题了
+//	const char* s1 = arr1; 
+//	const char* s2 = arr2;
+//	const char* cur = arr1;
+//	while (*cur)//while (*cur != '\0')
+//	{
+//		s1 = cur;
+//		s2 = arr2;
+//		while (*s1&&*s2&&(* s1 == * s2))
+//		{
+//			s1++;
+//			s2++;
+//		}
+//		if (*s2 == '\0')
+//		{
+//			return (char*)cur;
+//		}
+//		cur++;
+//	}
+//	return NULL;
+//}
+////查找字串的时候其实还有一个更高效的，更经典的KMP算法，但我们这讲的是C语言，不是算法
+////想要进一步了解的可以在b站 搜索  比特大博哥
+//int main()
+//{
+//	char arr1[100] = { 0 };
+//	char arr2[100] = { 0 };
+//	gets(arr1);
+//	gets(arr2);
+//		if (my_strstr(arr1, arr2) == NULL)
+//		{
+//			printf("没找到对应字符串\n");
+//		}
+//		else
+//			printf("%s\n", my_strstr(arr1, arr2));
+//	return 0;
+//}
+//
+
+//作业  ： 模拟实现strlen
+//#include<assert.h>
+//int my_strlen(char* arr1)
+//{
+//	int count = 0;
+//	while (*arr1++)
+//	{
+//		count++;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	while (1)
+//	{
+//		char arr1[100] = { 0 };
+//		gets(arr1);
+//		printf("%d\n", my_strlen(arr1));
+//	}
+//	return 0;
+//}
+
+////作业2： 模拟实现strcpy
+//char* my_strcpy(char* arr1, char* arr2)
+//{
+//	char* ret = arr1;
+//	while (*arr1)
+//	{
+//		arr1++;
+//	}
+//	while (*arr2)
+//	{
+//		*arr1++ = *arr2++;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[100] = { 0 };
+//	char arr2[100] = { 0 };
+//	gets(arr1);
+//	gets(arr2);
+//	printf("%s",my_strcpy(arr1, arr2));
+//
+//	return 0;
+//}
+
+////作业3： 模拟实现strcmp
+//#include<assert.h>
+//int my_strcmp(char* arr1, char* arr2)
+//{
+//	assert(arr1 && arr2);
+//	while (*arr1)
+//	{
+//		if (*arr1 == *arr2)
+//		{
+//			arr1++;
+//			arr2++;
+//		}
+//		if (*arr1 != *arr2)
+//		{
+//			if (*arr1 > *arr2)
+//			{
+//				return 1;
+//			}
+//			else
+//				return -1;
+//		}
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	while(1)
+//	{
+//	char arr1[100] = { 0 };
+//	char arr2[100] = { 0 };
+//	gets(arr1);
+//	gets(arr2);
+//	printf("%d\n", my_strcmp(arr1, arr2));
+//	}
+//	return 0;
+//}
+//
+
+////作业4模拟实现strcat	
+//#include<stdio.h>
+//#include<assert.h>
+//char* my_strcat(char* arr1, char* arr2)
+//{
+//	char* ret = arr1;
+//	while (*arr1)
+//	{
+//		arr1++;
+//	}
+//	while (*arr2)
+//	{
+//		*arr1 = *arr2;
+//		arr2++;
+//		arr1++;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[100] = { 0 };
+//	char arr2[100] = { 0 };
+//	gets(arr1);
+//	gets(arr2);
+//	my_strcat(arr1, arr2);
+//	printf("%s\n", arr1);
+//	return 0;
+//}
+
+
 
 
 
