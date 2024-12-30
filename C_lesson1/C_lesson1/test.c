@@ -14,4 +14,28 @@
 知识点：
 	什么是C语言？
 	1:11:46
+	集成开发环境  编辑 编译 链接 运行 调试
+	写出来的.c文本的文件 经过 编译 链接 生成.exe文件
 	*/
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+int main()
+{
+	printf("hello world!\n");
+	return 0;
+}
+
+/*
+逐过程调试F10
+void main()也可以  但是写法很古老
+int main(void)//明确表示main函数中不接收参数
+
+sizeof(long long)>=sizeof(long)>=sizeof(int)>=sizeof(int)>=sizeof(short)>=sizeof(char)
+这些变量类型是用来创建变量的
+不能以数字开头
+区分大小写
+不能使用关键字命名
+驼峰命名法
+	局部变量优先
+scanf函数使用过程中，需要使用CRT_SECURE_NO_WARNINGS  但是每个工程都需要重新写一遍这个代码
+*/
